@@ -37,10 +37,10 @@ export default function Menu() {
                 })}
             </MenuWrapper.CentralSide>
             <MenuWrapper.RightSide>
-                <Button ghost>
+                <Button ghost variant="secondary.main">
                     Entrar
                 </Button>
-                <Button>
+                <Button variant="primary.main">
                     Cadastrar
                 </Button>
             </MenuWrapper.RightSide>
