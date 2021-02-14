@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+
 import { TextStyleVariantsMap } from '../../foundation/Text';
+import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 
 const ButtonGhost = css`
     color: ${(props) => {
@@ -27,8 +29,6 @@ export const Button = styled.div`
     opacity: 1;
     border-radius: 8px;
 
-    ${TextStyleVariantsMap.paragraph1}
-
     // Confere qual é o tipo de botão para estilizar adequadamente
     ${(props) => {
         if (props.ghost) {
@@ -44,4 +44,15 @@ export const Button = styled.div`
     &:focus {
         opacity: .5;
     }
+
+    ${breakpointsMedia({
+        xs: css`
+            /* All devices */
+            ${TextStyleVariantsMap.smallestException}
+        `,
+        md: css`
+            /* From md breakpoint */
+            ${TextStyleVariantsMap.paragraph1}
+        `
+    })}
 `
