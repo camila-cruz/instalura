@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import { TextStyleVariantsMap } from '../../foundation/Text';
 
 const ButtonGhost = css`
     color: ${(props) => {
@@ -25,6 +26,8 @@ export const Button = styled.div`
     font-weight: bold;
     opacity: 1;
     border-radius: 8px;
+
+    ${TextStyleVariantsMap.paragraph1}
 
     // Confere qual é o tipo de botão para estilizar adequadamente
     ${(props) => {
