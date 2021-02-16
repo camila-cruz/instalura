@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import { TextStyleVariantsMap } from '../../foundation/Text';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
+import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const ButtonGhost = css`
     color: ${(props) => {
@@ -12,7 +13,6 @@ const ButtonGhost = css`
 `
 
 const ButtonDefault = css`
-    color: white;
     background-color: ${(props) => {
         return get(props.theme, `colors.${props.variant}.color`);
     }};
@@ -27,7 +27,23 @@ export const Button = styled.div`
     padding: 12px 26px;
     font-weight: bold;
     opacity: 1;
-    border-radius: 8px;
+    transition: opacity ${({ theme }) => theme.transition};
+    border-radius: ${({ theme }) => theme.borderRadius};
+
+    ${propToStyle('margin')}
+    ${propToStyle('display')}
+
+    ${breakpointsMedia({
+        xs: css`
+            /* All devices */
+            ${TextStyleVariantsMap.smallestException}
+        `,
+        md: css`
+            /* From md breakpoint */
+            padding: 12px 43px;
+            ${TextStyleVariantsMap.paragraph1}
+        `
+    })}
 
     // Confere qual é o tipo de botão para estilizar adequadamente
     ${(props) => {
@@ -37,22 +53,9 @@ export const Button = styled.div`
         return ButtonDefault;
     }};
 
-    transition: opacity ${({ theme }) => theme.transition};
-    border-radius: ${({ theme }) => theme.borderRadius};
-
     &:hover,
     &:focus {
         opacity: .5;
     }
 
-    ${breakpointsMedia({
-        xs: css`
-            /* All devices */
-            ${TextStyleVariantsMap.smallestException}
-        `,
-        md: css`
-            /* From md breakpoint */
-            ${TextStyleVariantsMap.paragraph1}
-        `
-    })}
 `
