@@ -3,16 +3,20 @@ import Footer from '../src/components/commons/Footer';
 import Text from '../src/components/foundation/Text';
 import { Button } from '../src/components/commons/Button';
 import { Grid } from '../src/components/foundation/layout/Grid';
+import { Box } from '../src/components/foundation/layout/Box';
 
 export default function Home() {
     return (
-        <div style={{
-            display: 'flex',    // Deixa o footer na parte de baixo da tela
-            flex: '1',
-            flexWrap: 'wrap',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-        }}>
+        <Box 
+            flex="1"
+            display="flex"    // Deixa o footer na parte de baixo da tela
+            flexWrap="wrap"
+            flexDirection="column"
+            justifyContent="space-between"
+            backgroundImage="url(/images/bubbles.svg)"
+            backgroundRepeat="no-repeat"
+            backgroundPosition="bottom right"
+        >
             <Menu />
             
             <Grid.Container>
@@ -26,6 +30,10 @@ export default function Home() {
                             xs: 12,
                             md: 5,
                         }}
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="flex-start"
+                        justifyContent="center"
                     >
                         
                         <Text
@@ -43,13 +51,14 @@ export default function Home() {
                             variant="paragraph1"
                             tag="p"
                             color="tertiary.light"
-                            style={{
-                                textAlign: 'center'
+                            textAlign={{
+                                xs: 'center',
+                                md: 'left'
                             }}
                         >
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Vero voluptates veniam asperiores inventore architecto, dicta est temporibus ipsam, 
-                            repellat provident libero perspiciatis corrupti in illo!
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                            Saepe facilis dolorum debitis dolor. 
+                            Quas vitae dolor fugiat quae voluptatum molestiae nam. At.
                         </Text>
                         <Button 
                             variant="primary.main"
@@ -76,6 +85,6 @@ export default function Home() {
                 </Grid.Row>
             </Grid.Container>
             <Footer />
-        </div>
+        </Box>
     )
 }
