@@ -37,11 +37,19 @@ export default function Modal({ isOpen, onClose, children }) {
   return (
     <ModalWrapper
       isOpen={isOpen}
-      onClick={() => {
-        onClose();
+      onClick={(event) => {
+        const isSafeArea = event.target.closest('[data-modal-safe-area="true"]');
+
+        if (!isSafeArea) {
+          onClose();
+        }
       }}
     >
-      {children}
+      {/* Props do modal */
+        children({
+          'data-modal-safe-area': 'true',
+        })
+      }
     </ModalWrapper>
   );
 }
@@ -49,5 +57,5 @@ export default function Modal({ isOpen, onClose, children }) {
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.func.isRequired,
 };

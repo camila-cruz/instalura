@@ -22,7 +22,17 @@ export default function Home() {
       backgroundPosition="bottom right"
     >
       <Modal isOpen={isModalOpen} onClose={() => setModal(false)}>
-        Um modal aleatório
+        {(propsDoModal) => (
+          <Box
+            backgroundColor="white"
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {... propsDoModal}
+          >
+            <div>
+              Um modal aleatório
+            </div>
+          </Box>
+        )}
       </Modal>
       <Menu />
 
