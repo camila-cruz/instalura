@@ -1,57 +1,57 @@
 import { typographyVariants } from './typographyVariants';
 
 export const colors = {
-    background: {
-        light: {
-            color: '#FFFFFF',
-        },
-        main: {
-            color: '#F2F2F2',
-        },
+  background: {
+    light: {
+      color: '#FFFFFF',
     },
-    borders: {
-        main: {
-            color: '#F1F1F1',
-        },
+    main: {
+      color: '#F2F2F2',
     },
-    primary: {
-        main: {
-            color: '#D7385E',
-            contrastText: '#fff',
-        },
+  },
+  borders: {
+    main: {
+      color: '#F1F1F1',
     },
-    secondary: {
-        main: {
-            color: '#FB7B6B',
-            contrastText: '#fff',
-        },
+  },
+  primary: {
+    main: {
+      color: '#D7385E',
+      contrastText: '#fff',
     },
-    tertiary: {
-        main: {
-            color: '#070C0E',
-            contrastText: '#fff',
-        },
-        light: {
-            color: '#88989E',
-            contrastText: '#fff',
-        },
+  },
+  secondary: {
+    main: {
+      color: '#FB7B6B',
+      contrastText: '#fff',
     },
-    modes: {
-        dark: {},
+  },
+  tertiary: {
+    main: {
+      color: '#070C0E',
+      contrastText: '#fff',
     },
+    light: {
+      color: '#88989E',
+      contrastText: '#fff',
+    },
+  },
+  modes: {
+    dark: {},
+  },
 };
   
 export default {
-    colors,
-    typographyVariants,
-    breakpoints: {
-        xs: 0,
-        sm: 480,
-        md: 768,
-        lg: 992,
-        xl: 1200,
-    },
-    fontFamily: '\'Rubik\', sans-serif',
-    borderRadius: '8px',
-    transition: '200ms ease-in-out',
+  colors,
+  typographyVariants,
+  breakpoints: {
+    xs: 0,
+    sm: 480,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+  },
+  fontFamily: '\'Rubik\', sans-serif',
+  borderRadius: '8px',
+  transition: '200ms ease-in-out',
 };
