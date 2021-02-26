@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "framer-motion": "^3.7.0",
     "lodash": "^4.17.20",
     "next": "latest",
     "prop-types": "^15.7.2",
