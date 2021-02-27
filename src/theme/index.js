@@ -40,7 +40,7 @@ export const colors = {
     dark: {},
   },
 };
-  
+
 export default {
   colors,
   typographyVariants,

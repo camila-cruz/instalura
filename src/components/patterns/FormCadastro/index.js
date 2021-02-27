@@ -64,10 +64,12 @@ function FormContent() {
         })
         .then((respostaConvertidaEmObjeto) => {
           setSubmissionStatus(formStates.DONE);
+          // eslint-disable-next-line no-console
           console.log(respostaConvertidaEmObjeto);
         })
         .catch((error) => {
           setSubmissionStatus(formStates.ERROR);
+          // eslint-disable-next-line no-console
           console.error(error);
         });
     }}
