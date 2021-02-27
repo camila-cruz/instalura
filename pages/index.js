@@ -6,9 +6,10 @@ import { Button } from '../src/components/commons/Button';
 import { Grid } from '../src/components/foundation/layout/Grid';
 import { Box } from '../src/components/foundation/layout/Box';
 import Modal from '../src/components/commons/Modal';
+import FormCadastro from '../src/components/patterns/FormCadastro';
 
 export default function Home() {
-  const [isModalOpen, setModal] = useState(false);
+  const [isModalOpen, setModal] = useState(true);
 
   return (
     <Box
@@ -23,15 +24,7 @@ export default function Home() {
     >
       <Modal isOpen={isModalOpen} onClose={() => setModal(false)}>
         {(propsDoModal) => (
-          <Box
-            backgroundColor="white"
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {... propsDoModal}
-          >
-            <div>
-              Um modal aleatório
-            </div>
-          </Box>
+          <FormCadastro propsDoModal={propsDoModal} />
         )}
       </Modal>
       <Menu />

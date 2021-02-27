@@ -16,7 +16,7 @@ const ButtonDefault = css`
   color: ${(props) => get(props.theme, `colors.${props.variant}.contrastText`)};
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   border: 0;
   cursor: pointer;
   padding: 12px 26px;
@@ -24,9 +24,6 @@ export const Button = styled.div`
   opacity: 1;
   transition: opacity ${({ theme }) => theme.transition};
   border-radius: ${({ theme }) => theme.borderRadius};
-
-  ${propToStyle('margin')}
-  ${propToStyle('display')}
 
   ${breakpointsMedia({
     xs: css`
@@ -37,7 +34,7 @@ export const Button = styled.div`
       /* From md breakpoint */
       padding: 12px 43px;
       ${TextStyleVariantsMap.paragraph1}
-    `
+    `,
   })}
 
   // Confere qual é o tipo de botão para estilizar adequadamente
@@ -53,4 +50,15 @@ export const Button = styled.div`
     opacity: .5;
   }
 
+  &:disabled {
+    opacity: .2;
+    cursor: not-allowed;
+  }
+
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `};
+
+  ${propToStyle('margin')}
+  ${propToStyle('display')}
 `;
