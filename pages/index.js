@@ -9,7 +9,7 @@ import Modal from '../src/components/commons/Modal';
 import FormCadastro from '../src/components/patterns/FormCadastro';
 
 export default function Home() {
-  const [isModalOpen, setModal] = useState(true);
+  const [isModalOpen, setModal] = useState(false);
 
   return (
     <Box
@@ -27,6 +27,7 @@ export default function Home() {
           <FormCadastro propsDoModal={propsDoModal} />
         )}
       </Modal>
+
       <Menu />
 
       <Grid.Container>
