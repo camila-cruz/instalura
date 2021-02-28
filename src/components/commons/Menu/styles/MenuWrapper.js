@@ -80,13 +80,13 @@ MenuWrapper.CentralSide = styled.div`
     }
 
     ${breakpointsMedia({
-      xs: css`
-        ${TextStyleVariantsMap.smallestException}
-        `,
-      md: css`
-        ${TextStyleVariantsMap.paragraph1}
-        `,
-    })}
+    xs: css`
+      ${TextStyleVariantsMap.smallestException}
+    `,
+    md: css`
+      ${TextStyleVariantsMap.paragraph1}
+    `,
+  })}
   }
 
   ${breakpointsMedia({
