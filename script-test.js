@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 const shell = require('shelljs');
 
 console.log('Olá mundo!');
