@@ -4,6 +4,7 @@ import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
+import Link from '../../commons/Link';
 
 export const TextStyleVariantsMap = {
   paragraph1: css`
@@ -45,11 +46,13 @@ export default function Text({
   tag,
   variant,
   children,
+  href,
   ...props
 }) {
   return (
     <TextBase
-      as={tag}
+      as={href ? Link : tag}
+      href={href}
       variant={variant}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
@@ -62,6 +65,7 @@ export default function Text({
 /* Validação dos tipos de entrada dos atributos */
 Text.propTypes = {
   tag: PropTypes.string,
+  href: PropTypes.string,
   variant: PropTypes.string, // Não é obrigatório pq tem valor padrão
   children: PropTypes.node,
 };
@@ -70,4 +74,5 @@ Text.defaultProps = {
   tag: 'span',
   variant: 'paragraph1',
   children: null,
+  href: null,
 };
