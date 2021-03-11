@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Logo from '../../../theme/Logo';
-
-import Text from '../../foundation/Text';
 import { Button } from '../Button';
 import { MenuWrapper } from './styles/MenuWrapper';
+import Link from '../Link';
 
 const links = [
   {
@@ -20,7 +20,7 @@ const links = [
   },
 ];
 
-export default function Menu() {
+export default function Menu({ onCadastrarClick }) {
   return (
     <MenuWrapper>
       <MenuWrapper.LeftSide>
@@ -29,9 +29,9 @@ export default function Menu() {
       <MenuWrapper.CentralSide>
         {links.map((link) => (
           <li key={link.url}>
-            <Text tag="a" variant="smallestException" href={link.url}>
+            <Link href={link.url}>
               {link.texto}
-            </Text>
+            </Link>
           </li>
         ))}
       </MenuWrapper.CentralSide>
@@ -39,10 +39,14 @@ export default function Menu() {
         <Button ghost variant="secondary.main">
           Entrar
         </Button>
-        <Button variant="primary.main">
+        <Button variant="primary.main" onClick={onCadastrarClick}>
           Cadastrar
         </Button>
       </MenuWrapper.RightSide>
     </MenuWrapper>
   );
 }
+
+Menu.propTypes = {
+  onCadastrarClick: PropTypes.func.isRequired,
+};
