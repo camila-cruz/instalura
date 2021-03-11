@@ -28,7 +28,9 @@ export default function Home() {
         )}
       </Modal>
 
-      <Menu />
+      <Menu
+        onCadastrarClick={() => setModal(true)}
+      />
 
       <Grid.Container>
         <Grid.Row>
