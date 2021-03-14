@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { GlobalStyle } from '../src/theme/GlobalStyle';
 
 import theme from '../src/theme';
+import SEO from '../src/components/commons/SEO';
 
 export default function App({
   Component,
@@ -20,6 +21,8 @@ export default function App({
           rel="stylesheet"
         />
       </Head>
+
+      <SEO headTitle="Home" />
 
       <ThemeProvider theme={theme}>
         <GlobalStyle />
