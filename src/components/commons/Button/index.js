@@ -87,5 +87,5 @@ Button.defaultProps = {
 
 Button.propTypes = {
   href: PropTypes.string,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };

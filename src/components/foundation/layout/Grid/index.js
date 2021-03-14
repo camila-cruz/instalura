@@ -123,6 +123,7 @@ const Col = styled.div`
   ${propToStyle('alignItems')}
   ${propToStyle('justifyContent')}
   ${propToStyle('paddingRight')}
+  ${propToStyle('order')}
 `;
 
 Col.defaultProps = {
@@ -137,9 +138,12 @@ const Row = styled.div`
   margin-left: -16px;
 
   ${propToStyle('flex')}
+  ${propToStyle('justifyContent')}
+  ${propToStyle('flexDirection')}
+  ${propToStyle('marginTop')}
   ${propToStyle('marginLeft')}
   ${propToStyle('marginRight')}
-  ${propToStyle('justifyContent')}
+  ${propToStyle('marginBottom')}
 `;
 
 // eslint-disable-next-line import/prefer-default-export
