@@ -7,8 +7,9 @@ export default function SEO({ headTitle }) {
   const baseTitle = 'Instalura - Projeto Base do Alura Bootcamp JAMStack';
   const title = hasHeadTitle ? `${headTitle} | ${baseTitle}` : baseTitle;
   const description = 'Saiba tudo que acontece entre os devs';
-  const image = '/images/logo.png';
+  const imageSrc = '/images/logo.png';
   const urlBase = 'https://instalura.camila-cruz.vercel.app/';
+  const image = `${urlBase}/${imageSrc}`;
 
   return (
     <Head>
