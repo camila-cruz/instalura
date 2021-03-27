@@ -33,6 +33,9 @@ const Container = styled.div`
   })}
 
   ${propToStyle('marginTop')}
+  ${propToStyle('display')}
+  ${propToStyle('flex')}
+  ${propToStyle('alignItems')}
 `;
 
 const Col = styled.div`
