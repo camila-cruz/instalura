@@ -8,8 +8,8 @@ import { loginService } from '../../../services/login/loginService';
 export default function LoginForm() {
   const router = useRouter();
   const initialValues = {
-    usuario: 'camilacruz',
-    senha: 'senhasegura',
+    usuario: '',
+    senha: '',
   };
 
   const form = useForm({
