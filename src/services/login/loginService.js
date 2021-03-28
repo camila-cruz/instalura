@@ -1,3 +1,5 @@
+import { setCookie, destroyCookie } from 'nookies';
+
 async function HttpClient(url, { headers, body, ...options }) {
   return fetch(url, {
     headers: {
@@ -14,7 +16,18 @@ async function HttpClient(url, { headers, body, ...options }) {
 
       throw new Error('Falha em pegar os dados do servidor :(');
     })
-    .then((respostaConvertida) => respostaConvertida);
+    .then((respostaConvertida) => {
+      const { token } = respostaConvertida.data;
+      const DAY_IN_SECONDS = 86400;
+
+      setCookie(null, 'APP_TOKEN', token, {
+        path: '/', // Todas as pgs a partir da raiz têm acesso ao cookie
+        maxAge: DAY_IN_SECONDS * 7, // maxAge sempre em segundos
+      });
+      return {
+        token,
+      };
+    });
 }
 
 export const loginService = {
@@ -26,5 +39,8 @@ export const loginService = {
         password,
       },
     });
+  },
+  logout() {
+    destroyCookie(null, 'APP_TOKEN');
   },
 };
