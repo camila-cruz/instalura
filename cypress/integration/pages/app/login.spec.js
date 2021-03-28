@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-// import { describe } from "mocha";
+import LoginScreenPageObject from '../../../../src/components/screens/app/LoginScreen/LoginScreen.pageObject';
 
 describe('/pages/app/login', () => {
   // it é o teste que estamos fazendo
@@ -8,17 +8,14 @@ describe('/pages/app/login', () => {
     cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
       .as('userLogin');
 
+    const loginScreen = new LoginScreenPageObject(cy);
+
+    loginScreen
+      .fillLoginForm({ user: 'camilacruz', password: 'senhasegura' })
+      .submitLoginForm();
+
     // Vai até esta página
     cy.visit('/app/login');
-
-    // Preencher o input de usuário
-    cy.get('#formCadastro input[name="usuario"]').type('camilacruz');
-
-    // Preencher o input de senha
-    cy.get('#formCadastro input[name="senha"]').type('senhasegura');
-
-    // Clicar no botão de submit
-    cy.get('#formCadastro button[type="submit"]').click();
 
     // O que esperamos? Ir para /app/profile
     cy.url().should('include', '/app/profile');
