@@ -1,6 +1,8 @@
 export default class LoginScreenPageObject {
   constructor(cy) {
     this.cy = cy;
+
+    // Vai até esta página
     this.cy.visit('/app/login');
   }
 
