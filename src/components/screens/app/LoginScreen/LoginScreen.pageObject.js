@@ -10,10 +10,14 @@ export default class LoginScreenPageObject {
 
     // Preencher o input de senha
     this.cy.get('#formCadastro input[name="senha"]').type(password);
+
+    return this;
   }
 
   submitLoginForm() {
     // Clicar no botão de submit
     this.cy.get('#formCadastro button[type="submit"]').click();
+
+    return this;
   }
 }
