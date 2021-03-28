@@ -8,14 +8,14 @@ describe('/pages/app/login', () => {
     cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
       .as('userLogin');
 
+    // Vai até esta página
+    cy.visit('/app/login');
+
     const loginScreen = new LoginScreenPageObject(cy);
 
     loginScreen
       .fillLoginForm({ user: 'camilacruz', password: 'senhasegura' })
       .submitLoginForm();
-
-    // Vai até esta página
-    cy.visit('/app/login');
 
     // O que esperamos? Ir para /app/profile
     cy.url().should('include', '/app/profile');
