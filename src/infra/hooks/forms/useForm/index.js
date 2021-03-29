@@ -50,6 +50,7 @@ export function useForm({ initialValues, onSubmit, validateSchema }) {
     },
     // Validação de erros
     isFormDisabled,
+    setIsFormDisabled,
     errors,
     touched,
     handleBlur(event) {
