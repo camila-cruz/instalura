@@ -9,4 +9,8 @@ module.exports = {
     '<rootDir>/cypress/',
     '<rootDir>/dist/',
   ],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'src/**/*.js',
+  ],
 };

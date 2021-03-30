@@ -16,18 +16,6 @@ async function HttpClient(url, { headers, body, ...options }) {
       }
 
       throw new Error('Falha em pegar os dados do servidor :(');
-    })
-    .then((respostaConvertida) => {
-      const { token } = respostaConvertida.data;
-      const DAY_IN_SECONDS = 86400;
-
-      setCookie(null, 'APP_TOKEN', token, {
-        path: '/', // Todas as pgs a partir da raiz têm acesso ao cookie
-        maxAge: DAY_IN_SECONDS * 7, // maxAge sempre em segundos
-      });
-      return {
-        token,
-      };
     });
 }
 
@@ -40,16 +28,31 @@ const BASE_URL = isStagingEnv
 // const BASE_URL = 'https://instalura-api-git-master-omariosouto.vercel.app';
 
 export const loginService = {
-  async login({ username, password }) {
-    return HttpClient(`${BASE_URL}/api/login`, {
+  async login({ username, password }, setCookieModule = setCookie, HttpClientModule = HttpClient) {
+    return HttpClientModule(`${BASE_URL}/api/login`, {
       method: 'POST',
       body: {
         username,
         password,
       },
-    });
+    })
+      .then((respostaConvertida) => {
+        const { token } = respostaConvertida.data;
+
+        if (!token) throw new Error('Falha no login');
+
+        const DAY_IN_SECONDS = 86400;
+
+        setCookieModule(null, 'APP_TOKEN', token, {
+          path: '/', // Todas as pgs a partir da raiz têm acesso ao cookie
+          maxAge: DAY_IN_SECONDS * 7, // maxAge sempre em segundos
+        });
+        return {
+          token,
+        };
+      });
   },
-  logout() {
-    destroyCookie(null, 'APP_TOKEN');
+  logout(destroyCookieModule = destroyCookie) {
+    destroyCookieModule(null, 'APP_TOKEN');
   },
 };
