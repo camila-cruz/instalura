@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 function formatErrors(yupErrorsInner = []) {
-  yupErrorsInner.reduce((errorObjectAcc, currentError) => {
+  return yupErrorsInner.reduce((errorObjectAcc, currentError) => {
     const fieldName = currentError.path;
     const errorMessage = currentError.message;
 
