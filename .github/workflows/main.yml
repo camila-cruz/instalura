@@ -68,23 +68,19 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.15.0'
-      
-      - name: Get npm cache directory
-        id: npm-cache
-        run: |
-          echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2
         with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       # ####################
 
       # Commands that will run:
       - name: Install Packages
-        run: npm run --prefer-offline
+        run: yarn --prefer-offline
 
       - name: Run Unit Tests
-        run: npm run test
+        run: yarn test
