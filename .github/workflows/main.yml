@@ -110,4 +110,6 @@ jobs:
         run: yarn --prefer-offline
 
       - name: Run Integration Tests
-        run: yarn test:integration:build 
+        run: |
+          npm config set scripts-prepend-node-path auto
+          yarn test:integration:build 
