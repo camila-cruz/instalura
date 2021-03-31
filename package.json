@@ -14,7 +14,7 @@
     "test:watch": "jest --watch",
     "test:integration:open": "cypress open",
     "test:integration": "cypress run --headless",
-    "test:integration:build": "start-server-and-test build/start http-get://localhost:3000 test:integration",
+    "test:integration:build": "start-server-and-test start http-get://localhost:3000 test:integration",
     "build/start": "npm run build && npm run start"
   },
   "dependencies": {
