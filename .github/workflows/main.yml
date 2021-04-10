@@ -47,10 +47,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-        env: 
-          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
       
       - name: Instala as dependências e faz o build do projeto
+        env: 
+          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
         run: |
           npm install
           npm run build
@@ -97,8 +97,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.15.0'
-        env: 
-          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -116,6 +114,8 @@ jobs:
         # run: yarn --prefer-offline
 
       - name: Run Integration Tests
+        env: 
+          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
         run: |
           npm config set scripts-prepend-node-path auto
           yarn test:integration:build 
