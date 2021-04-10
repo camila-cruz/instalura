@@ -51,7 +51,7 @@ jobs:
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v1
         with:
-          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
 
       - name: Instala as dependências e faz o build do projeto        
         run: |
@@ -114,7 +114,7 @@ jobs:
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v1
         with:
-          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
 
       # Commands that will run:
       - name: Install Packages
