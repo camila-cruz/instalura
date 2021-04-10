@@ -47,8 +47,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-
-      - name: Configura variáveis de ambiente
         env: 
           DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
       
@@ -99,8 +97,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.15.0'
-
-      - name: Configura variáveis de ambiente
         env: 
           DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
 
