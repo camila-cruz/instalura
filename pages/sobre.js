@@ -1,5 +1,9 @@
 import React from 'react';
+import AboutScreen from '../src/components/screens/AboutScreen';
+import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
-export default function Sobre() {
-  return <h1>Sobre</h1>;
+function Sobre() {
+  return <AboutScreen />;
 }
+
+export default websitePageHOC(Sobre);
