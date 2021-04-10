@@ -48,9 +48,13 @@ jobs:
         with:
           node-version: 12.x
       
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+
       - name: Instala as dependências e faz o build do projeto
         env: 
-          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
         run: |
           npm install
           npm run build
@@ -108,14 +112,17 @@ jobs:
 
       # ####################
 
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+
       # Commands that will run:
       - name: Install Packages
         run: npm install
         # run: yarn --prefer-offline
 
       - name: Run Integration Tests
-        env: 
-          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
         run: |
           npm config set scripts-prepend-node-path auto
           yarn test:integration:build 
