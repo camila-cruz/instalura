@@ -47,6 +47,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+
+      - name: Configura variáveis de ambiente
+        env: 
+          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
       
       - name: Instala as dependências e faz o build do projeto
         run: |
@@ -96,13 +100,18 @@ jobs:
         with:
           node-version: '14.15.0'
 
-      # - name: Get yarn cache directory path
-      #   id: yarn-cache-dir-path
-      #   run: echo "::set-output name=dir::$(yarn cache dir)"
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Configura variáveis de ambiente
+        env: 
+          DATO_CMS_TOKEN:  ${{ secrets.DATO_CMS_TOKEN }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
       # ####################
 
       # Commands that will run:
