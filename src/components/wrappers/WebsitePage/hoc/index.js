@@ -12,7 +12,11 @@ export default function websitePageHOC(
   /* Props injetadas pelo NextJS (ex.: retorno da getStaticProps) */
   return (props) => (
     <WebsiteGlobalProvider>
-      <WebsitePageWrapper {...pageWrapperProps} {...props.pageWrapperProps}>
+      <WebsitePageWrapper
+        {...pageWrapperProps}
+        {...props.pageWrapperProps}
+        messages={props.messages}
+      >
         <PageComponent {...props} />
       </WebsitePageWrapper>
     </WebsiteGlobalProvider>
