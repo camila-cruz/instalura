@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import Link from '../../commons/Link';
+import { WebsitePageContext } from '../../wrappers/WebsitePage/context';
 
 export const TextStyleVariantsMap = {
   paragraph1: css`
@@ -47,8 +48,15 @@ export default function Text({
   variant,
   children,
   href,
+  cmsKey,
   ...props
 }) {
+  const websitePageContext = useContext(WebsitePageContext);
+
+  const componentContent = cmsKey
+    ? websitePageContext.getCMSContent(cmsKey)
+    : children;
+
   return (
     <TextBase
       as={href ? Link : tag}
@@ -57,7 +65,7 @@ export default function Text({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
-      {children}
+      {componentContent}
     </TextBase>
   );
 }
@@ -68,6 +76,7 @@ Text.propTypes = {
   href: PropTypes.string,
   variant: PropTypes.string, // Não é obrigatório pq tem valor padrão
   children: PropTypes.node,
+  cmsKey: PropTypes.string,
 };
 
 Text.defaultProps = {
@@ -75,4 +84,5 @@ Text.defaultProps = {
   variant: 'paragraph1',
   children: null,
   href: null,
+  cmsKey: '',
 };
