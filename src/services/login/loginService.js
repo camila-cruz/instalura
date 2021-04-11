@@ -27,6 +27,8 @@ const BASE_URL = isStagingEnv
 
 // const BASE_URL = 'https://instalura-api-git-master-omariosouto.vercel.app';
 
+export const LOGIN_COOKIE_APP_TOKEN = 'LOGIN_COOKIE_APP_TOKEN';
+
 export const loginService = {
   async login({ username, password }, setCookieModule = setCookie, HttpClientModule = HttpClient) {
     return HttpClientModule(`${BASE_URL}/api/login`, {
@@ -43,7 +45,7 @@ export const loginService = {
 
         const DAY_IN_SECONDS = 86400;
 
-        setCookieModule(null, 'APP_TOKEN', token, {
+        setCookieModule(null, LOGIN_COOKIE_APP_TOKEN, token, {
           path: '/', // Todas as pgs a partir da raiz têm acesso ao cookie
           maxAge: DAY_IN_SECONDS * 7, // maxAge sempre em segundos
         });
