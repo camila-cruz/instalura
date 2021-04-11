@@ -54,7 +54,7 @@ jobs:
           envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
 
       - name: Instala as dependências e faz o build do projeto        
-        with:
+        env:
           DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
         run: |
           npm install
@@ -124,7 +124,7 @@ jobs:
         # run: yarn --prefer-offline
 
       - name: Run Integration Tests
-        with:
+        env:
           DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
         run: |
           npm config set scripts-prepend-node-path auto
