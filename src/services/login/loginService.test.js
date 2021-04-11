@@ -59,7 +59,7 @@ describe('loginService', () => {
     describe('when a user attempts to log out', () => {
       test('its token is removed', async () => {
         const destroyCookieModule = jest.fn();
-        await loginService.logout(destroyCookieModule);
+        await loginService.logout(null, destroyCookieModule);
         expect(destroyCookieModule).toHaveBeenCalledWith(null, COOKIE_NAME);
       });
     });
