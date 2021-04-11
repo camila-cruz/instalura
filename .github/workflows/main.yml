@@ -42,6 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
       
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
@@ -52,11 +54,13 @@ jobs:
         uses: SpicyPizza/create-envfile@v1
         with:
           envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          file_name: .env
 
       - name: Instala as dependências e faz o build do projeto        
         env:
           DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
         run: |
+          cat .env
           npm install
           npm run build
       
@@ -117,6 +121,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v1
         with:
           envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          file_name: .env
 
       # Commands that will run:
       - name: Install Packages
@@ -127,5 +132,6 @@ jobs:
         env:
           DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
         run: |
+          cat .env
           npm config set scripts-prepend-node-path auto
           yarn test:integration:build 
