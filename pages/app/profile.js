@@ -1,11 +1,16 @@
 import React from 'react';
 import { authService } from '../../src/services/auth/authService';
-import { userService } from '../../src/services/user/userService';
+import { useUserService } from '../../src/services/user/hook';
 
 export default function ProfilePage(props) {
+  const dados = useUserService.getProfilePage();
+
   return (
     <div>
       <pre>
+        {dados.loading && 'Carregando...'}
+        {!dados.loading && dados.data && 'Carregou com sucesso'}
+        {!dados.loading && dados.error}
         {JSON.stringify(props, null, 4)}
       </pre>
       Página de Profile!
@@ -21,15 +26,15 @@ export async function getServerSideProps(ctx) {
 
   if (hasActiveSession) {
     const session = await auth.getSession();
-    const profilePage = await userService.getProfilePage(ctx);
+    // const profilePage = await userService.getProfilePage(ctx);
 
     return {
       props: {
         user: {
           ...session,
-          ...profilePage.user,
+          // ...profilePage.user,
         },
-        posts: profilePage,
+        // posts: profilePage,
       },
     };
   }
