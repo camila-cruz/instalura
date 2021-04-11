@@ -124,12 +124,12 @@ jobs:
 
       # Commands that will run:
       - name: Install Packages
-        run: npm install
-        # run: yarn --prefer-offline
+        # run: npm install
+        run: yarn --prefer-offline
 
       - name: Run Integration Tests
         env:
           DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
+          # npm config set scripts-prepend-node-path auto
         run: |
-          npm config set scripts-prepend-node-path auto
           yarn test:integration:build 
