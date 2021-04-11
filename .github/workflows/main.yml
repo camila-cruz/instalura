@@ -7,8 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    types: [ opened, synchronize ]
+  # pull_request:
+  #   types: [ opened, synchronize ]
   pull_request_target:
     types: [ opened, synchronize ]
 
@@ -44,9 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          # DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
-          DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
       
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
@@ -60,8 +57,8 @@ jobs:
           file_name: .env
 
       - name: Instala as dependências e faz o build do projeto        
-        env:
-          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+        # env:
+        #   DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
         run: |
           cat .env
           npm install
