@@ -8,7 +8,7 @@ on:
   push:
     branches: [ main ]
   pull_request_target:
-    types: [ assigned, opened, synchronize, reopened ]
+    types: [ opened, synchronize ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -43,7 +43,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          # DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
       
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
@@ -130,7 +131,7 @@ jobs:
 
       - name: Run Integration Tests
         env:
-          DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+          DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
         run: |
           cat .env
           npm config set scripts-prepend-node-path auto
