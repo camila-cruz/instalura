@@ -1,23 +1,6 @@
 import { setCookie, destroyCookie } from 'nookies';
 import { isStagingEnv } from '../../infra/env/isStagingEnv';
-
-async function HttpClient(url, { headers, body, ...options }) {
-  return fetch(url, {
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-    ...options,
-  })
-    .then((respostaDoServidor) => {
-      if (respostaDoServidor.ok) {
-        return respostaDoServidor.json();
-      }
-
-      throw new Error('Falha em pegar os dados do servidor :(');
-    });
-}
+import { HttpClient } from '../../infra/http/HttpClient';
 
 const BASE_URL = isStagingEnv
   // Back-end de DEV
@@ -54,7 +37,7 @@ export const loginService = {
         };
       });
   },
-  logout(destroyCookieModule = destroyCookie) {
-    destroyCookieModule(null, 'APP_TOKEN');
+  logout(ctx, destroyCookieModule = destroyCookie) {
+    destroyCookieModule(ctx, LOGIN_COOKIE_APP_TOKEN, { path: '/' });
   },
 };

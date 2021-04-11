@@ -20,6 +20,7 @@ export async function getServerSideProps(ctx) {
 
   if (hasActiveSession) {
     const session = await auth.getSession();
+
     return {
       props: {
         user: session,
@@ -27,6 +28,9 @@ export async function getServerSideProps(ctx) {
     };
   }
 
-  ctx.res.writeHead(307, '/');
-  return ctx.res.end();
+  ctx.res.writeHead(307, { location: '/login' });
+  ctx.res.end();
+  return {
+    props: {},
+  };
 }
