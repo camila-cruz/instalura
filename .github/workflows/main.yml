@@ -7,10 +7,10 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  # pull_request:
-  #   types: [ opened, synchronize ]
-  pull_request_target:
+  pull_request:
     types: [ opened, synchronize ]
+  # pull_request_target:
+  #   types: [ opened, synchronize ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -50,17 +50,16 @@ jobs:
         with:
           node-version: 12.x
       
-      - name: Create .env file
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
-          file_name: .env
+      # - name: Create .env file
+      #   uses: SpicyPizza/create-envfile@v1
+      #   with:
+      #     envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+      #     file_name: .env
 
       - name: Instala as dependências e faz o build do projeto        
-        # env:
-        #   DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
+        env:
+          DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
         run: |
-          cat .env
           npm install
           npm run build
       
@@ -117,11 +116,11 @@ jobs:
 
       # ####################
 
-      - name: Create .env file
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
-          file_name: .env
+      # - name: Create .env file
+      #   uses: SpicyPizza/create-envfile@v1
+      #   with:
+      #     envkey_DATO_CMS_TOKEN: ${{ secrets.DATO_CMS_TOKEN }}
+      #     file_name: .env
 
       # Commands that will run:
       - name: Install Packages
@@ -132,6 +131,5 @@ jobs:
         env:
           DATO_CMS_TOKEN: 9242fc75801a7f4d763083884a1e01
         run: |
-          cat .env
           npm config set scripts-prepend-node-path auto
           yarn test:integration:build 
