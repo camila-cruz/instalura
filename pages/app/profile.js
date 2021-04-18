@@ -1,22 +1,22 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import ProfileScreen from '../../src/components/screens/app/ProfileScreen';
 import { authService } from '../../src/services/auth/authService';
+
 import { useUserService } from '../../src/services/user/hook';
 
-export default function ProfilePage(props) {
+export default function ProfilePage({ user }) {
   const dados = useUserService.getProfilePage();
 
-  return (
-    <div>
-      <pre>
-        {dados.loading && 'Carregando...'}
-        {!dados.loading && dados.data && 'Carregou com sucesso'}
-        {!dados.loading && dados.error}
-        {JSON.stringify(props, null, 4)}
-      </pre>
-      Página de Profile!
-      <img src="https://media.giphy.com/media/bn0zlGb4LOyo8/giphy.gif" alt="Nicolas Cage" />
-    </div>
-  );
+  // <pre>
+  //   {dados.loading && 'Carregando...'}
+  //   {!dados.loading && dados.data && 'Carregou com sucesso'}
+  //   {!dados.loading && dados.error}
+  //   {JSON.stringify(user, null, 4)}
+  // </pre>
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <ProfileScreen user={user.username} {...dados.data} />;
 }
 
 export async function getServerSideProps(ctx) {
