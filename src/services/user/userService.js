@@ -21,7 +21,7 @@ export const userService = {
       });
 
       return {
-        user: {
+        userInfo: {
           totalLikes: 100,
         },
         posts: response.data,
