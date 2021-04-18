@@ -1,11 +1,19 @@
-import { get } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { Grid } from '../../../../../foundation/layout/Grid';
 
 const Comments = styled.div`
   display: flex;
   border: 1px solid green;
+  padding-bottom: 24px;
+`;
+
+const PostDescription = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const CommentsButton = styled.button`
@@ -19,15 +27,15 @@ const CommentsButton = styled.button`
   color: ${(props) => get(props.theme, 'colors.tertiary.light.contrastText')}; */
 `;
 
-export function PostComments() {
+export function PostComments({ description }) {
   return (
     <Comments>
       <Grid.Col>
         avatares
       </Grid.Col>
-      <Grid.Col>
-        texto
-      </Grid.Col>
+      <PostDescription>
+        {description}
+      </PostDescription>
       <Grid.Col>
         <CommentsButton>
           Mais
@@ -36,3 +44,7 @@ export function PostComments() {
     </Comments>
   );
 }
+
+PostComments.propTypes = {
+  description: PropTypes.string.isRequired,
+};
