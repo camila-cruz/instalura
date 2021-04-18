@@ -128,6 +128,7 @@ const Col = styled.div`
   ${propToStyle('alignItems')}
   ${propToStyle('justifyContent')}
   ${propToStyle('paddingRight')}
+  ${propToStyle('padding')}
   ${propToStyle('order')}
 `;
 
