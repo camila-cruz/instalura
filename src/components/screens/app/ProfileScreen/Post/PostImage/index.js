@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 import { breakpointsMedia } from '../../../../../../theme/utils/breakpointsMedia';
 
 const Image = styled.div`
@@ -22,10 +23,14 @@ const Image = styled.div`
   }
 `;
 
-export function PostImage() {
+export function PostImage({ src }) {
   return (
     <Image>
-      <img src="https://via.placeholder.com/350x450" alt="Nicolas Cage e uma espada" />
+      <img src={src} alt="Nicolas Cage e uma espada" />
     </Image>
   );
 }
+
+PostImage.propTypes = {
+  src: PropTypes.string.isRequired,
+};
