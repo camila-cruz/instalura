@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   HomeOutline as HomeIcon,
   SearchOutline as SearchIcon,
   PlusOutline as AddIcon,
   HeartOutline as HeartIcon,
 } from '@styled-icons/evaicons-outline';
+import { get } from 'lodash';
 import { Avatar } from '../../../../commons/Avatar';
 
 const TabBarWrapper = styled.div`
@@ -18,7 +19,7 @@ const TabBarWrapper = styled.div`
 
   display: flex;
   justify-content: space-between;
-  padding: 20px 26px;
+  padding: 12px 26px;
 
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
@@ -28,7 +29,26 @@ const TabBarWrapper = styled.div`
 `;
 
 const Tab = styled.div`
-  height: auto;
+  height: 40px;
+  width: 40px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${({ rounded }) => rounded && css`
+    background-color: #FB7B6B;
+    border-radius: 50%;
+    & > svg {
+      fill: #FFFFFF;
+    }
+  `};
+
+  ${({ selected }) => selected && css`
+    & > svg {
+      fill: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
+    }
+  `}
 `;
 
 export function TabBar() {
@@ -40,7 +60,7 @@ export function TabBar() {
       <Tab>
         <SearchIcon size={24} />
       </Tab>
-      <Tab>
+      <Tab rounded>
         <AddIcon size={24} />
       </Tab>
       <Tab>
