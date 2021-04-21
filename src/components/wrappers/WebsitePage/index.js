@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
+import { useTheme } from 'styled-components';
 import Footer from '../../commons/Footer';
 import Menu from '../../commons/Menu';
 import Modal from '../../commons/Modal';
@@ -20,6 +21,8 @@ export default function WebsitePageWrapper({
   messages,
 }) {
   const [isModalOpen, setModal] = useState(false);
+  const theme = useTheme();
+
   return (
     <WebsitePageContext.Provider
       value={{
@@ -35,6 +38,7 @@ export default function WebsitePageWrapper({
         display="flex" // Deixa o footer na parte de baixo da tela
         flexDirection="column"
         flex="1"
+        backgroundColor={theme.colors.background.light.color}
         {...pageBoxProps}
       >
 
