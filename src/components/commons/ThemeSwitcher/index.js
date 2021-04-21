@@ -27,8 +27,13 @@ const ThemeSwitcherBase = styled.button`
 
 export function ThemeSwitcher({ onClick, theme }) {
   return (
-    <ThemeSwitcherBase onClick={onClick} currentTheme={theme}>
-      {theme === 'light' ? '🌚' : '🌞'}
+    <ThemeSwitcherBase
+      role="switch"
+      aria-checked
+      onClick={onClick}
+      currentTheme={theme}
+    >
+      {theme && theme === 'light' ? '🌛' : '🌞'}
     </ThemeSwitcherBase>
   );
 }
