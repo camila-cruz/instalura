@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import theme from '..';
+import { light as theme } from '..';
 
 const { breakpoints } = theme;
 
