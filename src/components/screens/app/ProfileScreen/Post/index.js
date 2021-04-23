@@ -10,6 +10,7 @@ import { PostComments } from './PostComments';
 const PostWrapper = styled.div`
   background-color: white;
   margin-bottom: 40px;
+  max-width: 100vw;
 `;
 
 export function Post({
