@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+  HeartOutline as LikeIcon,
+  PaperPlaneOutline as PlaneIcon,
+  MessageCircleOutline as CommentIcon,
+  BookmarkOutline as BookmarkIcon,
+} from '@styled-icons/evaicons-outline';
 import { Grid } from '../../../../../foundation/layout/Grid';
+import Text from '../../../../../foundation/Text';
 
 const ActionsBar = styled.div`
   display: flex;
@@ -10,6 +17,9 @@ const ActionsBar = styled.div`
 
 const Action = styled.div`
   margin-right: 16px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
 `;
 
 export function PostActions() {
@@ -21,13 +31,23 @@ export function PostActions() {
         padding={0}
       >
         <Action>
-          5.2k
+          <LikeIcon size={24} />
+          <Text
+            variant="paragraph2bold"
+          >
+            5.2k
+          </Text>
         </Action>
         <Action>
-          1.2k
+          <CommentIcon size={24} />
+          <Text
+            variant="paragraph2bold"
+          >
+            1.2k
+          </Text>
         </Action>
         <Action>
-          avião
+          <PlaneIcon size={24} />
         </Action>
       </Grid.Col>
 
@@ -37,8 +57,7 @@ export function PostActions() {
         justifyContent="flex-end"
         padding={0}
       >
-        book
-        {/* bookmark */}
+        <BookmarkIcon size={24} />
       </Grid.Col>
     </ActionsBar>
   );

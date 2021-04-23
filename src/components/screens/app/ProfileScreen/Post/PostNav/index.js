@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MoreHorizontalOutline as DotsIcon } from '@styled-icons/evaicons-outline/MoreHorizontalOutline';
+import { Avatar } from '../../../../../commons/Avatar';
 import { Grid } from '../../../../../foundation/layout/Grid';
+import Text from '../../../../../foundation/Text';
 
 const Nav = styled.div`
   border: 1px solid red;
   display: flex;
   justify-content: space-around;
   
-  padding: 16px 28px;
-  `;
+  padding: 16px 12px;
+`;
 
 Nav.UserInfo = styled.div`
   display: flex;
   align-items: center;
-
-  & > img {
-    margin-right: 12px;
-  }
+  column-gap: 12px;
 `;
 
 Nav.Menu = styled.div`
@@ -34,17 +34,27 @@ export function PostNav() {
         }}
       >
         <Nav.UserInfo>
-          <img src="https://via.placeholder.com/32" alt="Avatar do Nicolas Cage" />
-          Nicolas Cage
+          <Avatar
+            src="https://via.placeholder.com/32"
+            size={32}
+            alt="Nicolas Cage"
+          />
+          <Text
+            variant="paragraph2bold"
+          >
+            Nicolas Cage
+          </Text>
         </Nav.UserInfo>
       </Grid.Col>
       <Grid.Col
         value={{
           xs: 2,
         }}
+        display="flex"
+        alignItems="center"
       >
         <Nav.Menu>
-          ...
+          <DotsIcon size={24} />
         </Nav.Menu>
       </Grid.Col>
     </Nav>

@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import ProfileScreen from '../../src/components/screens/app/ProfileScreen';
+import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
 import { authService } from '../../src/services/auth/authService';
 
 import { useUserService } from '../../src/services/user/hook';
 
-export default function ProfilePage({ user }) {
+function ProfilePage({ user }) {
   const dados = useUserService.getProfilePage();
 
   // <pre>
@@ -18,6 +19,14 @@ export default function ProfilePage({ user }) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <ProfileScreen user={user.username} {...dados.data} />;
 }
+
+export default websitePageHOC(ProfilePage, {
+  pageWrapperProps: {
+    seoProps: {
+      headTitle: 'Feed',
+    },
+  },
+});
 
 export async function getServerSideProps(ctx) {
   const auth = authService(ctx);
