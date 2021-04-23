@@ -13,10 +13,10 @@ const AvatarBase = styled.div`
   }
 `;
 
-export function Avatar({ src, size }) {
+export function Avatar({ src, size, alt = 'usuário' }) {
   return (
     <AvatarBase size={size}>
-      <img src={src} alt="Avatar do usuário" />
+      <img src={src} alt={`Avatar do ${alt}`} />
     </AvatarBase>
   );
 }
@@ -24,4 +24,5 @@ export function Avatar({ src, size }) {
 Avatar.propTypes = {
   src: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
+  alt: PropTypes.string.isRequired,
 };
