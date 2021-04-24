@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled from 'styled-components';
@@ -5,6 +6,9 @@ import PropTypes from 'prop-types';
 import { Box } from '../../../foundation/layout/Box';
 import { Post } from './Post';
 import { TabBar } from './TabBar';
+import { Grid } from '../../../foundation/layout/Grid';
+import Text from '../../../foundation/Text';
+import { ProjectCard } from './ProjectCard';
 
 const ProfileScreenWrapper = styled.div`
   background-color: #e9e9e9;
@@ -13,11 +17,89 @@ const ProfileScreenWrapper = styled.div`
 `;
 
 export default function ProfileScreen({ posts }) {
+  // console.log(posts);
   return (
     <ProfileScreenWrapper>
       <Box>
-        {/* eslint-disable-next-line react/prop-types */}
-        {posts && posts.map((post) => <Post {...post} />)}
+        <Grid.Container
+          padding={{
+            xs: '0px',
+            md: 'initial',
+          }}
+        >
+          <Grid.Row
+            noMargin
+          >
+            <Grid.Col
+              value={{
+                xs: 12,
+                md: 6,
+              }}
+              offset={{
+                xs: 0,
+                md: 1,
+              }}
+              padding={{
+                xs: '0px',
+                md: 'initial',
+              }}
+            >
+              {/* eslint-disable-next-line react/prop-types */}
+              {posts && posts.reverse().map((post) => <Post {...post} key={post._id} />)}
+            </Grid.Col>
+            <Grid.Col
+              display={{
+                xs: 'none',
+                md: 'flex',
+              }}
+              flexDirection="column"
+              value={{
+                xs: 0,
+                md: 4,
+              }}
+            >
+              <ProjectCard
+                username="omariosouto"
+                name="Mario Souto"
+                imageSrc="https://via.placeholder.com/64"
+                githubUrl="aaaaa"
+                currentUser
+              />
+              <Text
+                variant="paragraph1bold"
+                color="tertiary.light"
+                marginLeft="16px"
+                marginBottom="24px"
+              >
+                Projetos da galera
+              </Text>
+              <ProjectCard
+                username="omariosouto"
+                name="Mario Souto"
+                imageSrc="https://via.placeholder.com/48"
+                githubUrl="aaaaa"
+              />
+              <ProjectCard
+                username="omariosouto"
+                name="Mario Souto"
+                imageSrc="https://via.placeholder.com/48"
+                githubUrl="aaaaa"
+              />
+              <ProjectCard
+                username="omariosouto"
+                name="Mario Souto"
+                imageSrc="https://via.placeholder.com/48"
+                githubUrl="aaaaa"
+              />
+              <ProjectCard
+                username="omariosouto"
+                name="Mario Souto"
+                imageSrc="https://via.placeholder.com/48"
+                githubUrl="aaaaa"
+              />
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
       </Box>
       <TabBar />
     </ProfileScreenWrapper>
