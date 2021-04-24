@@ -7,33 +7,24 @@ import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import Link from '../../commons/Link';
 import { WebsitePageContext } from '../../wrappers/WebsitePage/context';
 
+function TextStyle(variant) {
+  return css`
+    font-size: ${({ theme }) => theme.typographyVariants[variant].fontSize};
+    font-weight: ${({ theme }) => theme.typographyVariants[variant].fontWeight};
+    line-height: ${({ theme }) => theme.typographyVariants[variant].lineHeight};
+  `;
+}
+
 export const TextStyleVariantsMap = {
-  paragraph1: css`
-    font-size: ${({ theme }) => theme.typographyVariants.paragraph1.fontSize};
-    font-weight: ${({ theme }) => theme.typographyVariants.paragraph1.fontWeight};
-    line-height: ${({ theme }) => theme.typographyVariants.paragraph1.lineHeight};
-  `,
-  smallestException: css`
-    font-size: ${({ theme }) => theme.typographyVariants.smallestException.fontSize};
-    font-weight: ${({ theme }) => theme.typographyVariants.smallestException.fontWeight};
-    line-height: ${({ theme }) => theme.typographyVariants.smallestException.lineHeight};
-  `,
-  title: css`
-  ${({ theme }) => css`
-    font-size: ${theme.typographyVariants.titleXS.fontSize};
-    font-weight: ${theme.typographyVariants.titleXS.fontWeight};
-    line-height: ${theme.typographyVariants.titleXS.lineHeight};
-  `}
-  ${breakpointsMedia({
-    md: css`
-        ${({ theme }) => css`
-          font-size: ${theme.typographyVariants.title.fontSize};
-          font-weight: ${theme.typographyVariants.title.fontWeight};
-          line-height: ${theme.typographyVariants.title.lineHeight};
-        `}
-      `,
-  })}
-  `,
+  title: breakpointsMedia({
+    xs: TextStyle('titleXS'),
+    md: TextStyle('title'),
+  }),
+  subTitle: TextStyle('subTitle'),
+  paragraph1: TextStyle('paragraph1'),
+  paragraph2: TextStyle('paragraph2'),
+  paragraph2bold: TextStyle('paragraph2bold'),
+  smallestException: TextStyle('smallestException'),
 };
 
 const TextBase = styled.span`

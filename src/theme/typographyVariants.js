@@ -28,6 +28,12 @@ export const typographyVariants = {
     fontWeight: '400',
     lineHeight: 1.25, // 125%
   },
+  // [paragraph2]
+  paragraph2bold: {
+    fontSize: '14px',
+    fontWeight: '500',
+    lineHeight: 1.25, // 125%
+  },
   // [smallestException]
   smallestException: {
     fontSize: '12px',
