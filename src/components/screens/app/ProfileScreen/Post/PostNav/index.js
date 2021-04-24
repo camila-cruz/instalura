@@ -7,7 +7,6 @@ import { Grid } from '../../../../../foundation/layout/Grid';
 import Text from '../../../../../foundation/Text';
 
 const Nav = styled.div`
-  border: 1px solid red;
   display: flex;
   justify-content: space-around;
   

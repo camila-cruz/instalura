@@ -11,7 +11,6 @@ import Text from '../../../../../foundation/Text';
 
 const ActionsBar = styled.div`
   display: flex;
-  border: 1px solid orange;
   padding: 16px 24px;
 `;
 

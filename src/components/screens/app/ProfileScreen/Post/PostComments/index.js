@@ -8,7 +8,6 @@ import { breakpointsMedia } from '../../../../../../theme/utils/breakpointsMedia
 
 const Comments = styled.div`
   display: flex;
-  border: 1px solid green;
   padding: 0px 8px 24px 8px;
   /* padding-bottom: 24px; */
 `;
