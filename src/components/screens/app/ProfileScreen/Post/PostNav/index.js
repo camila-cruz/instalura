@@ -23,6 +23,10 @@ Nav.Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  svg {
+    fill: ${({ theme }) => theme.colors.tertiary.main.color};
+  }
 `;
 
 export function PostNav({ user }) {
@@ -41,6 +45,7 @@ export function PostNav({ user }) {
           />
           <Text
             variant="paragraph2bold"
+            color="tertiary.main"
           >
             {user}
           </Text>

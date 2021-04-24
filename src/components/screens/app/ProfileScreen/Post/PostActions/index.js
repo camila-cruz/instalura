@@ -12,6 +12,10 @@ import Text from '../../../../../foundation/Text';
 const ActionsBar = styled.div`
   display: flex;
   padding: 16px 24px;
+
+  svg {
+    fill: ${({ theme }) => theme.colors.tertiary.main.color};
+  }
 `;
 
 const Action = styled.div`
@@ -33,6 +37,7 @@ export function PostActions() {
           <LikeIcon size={24} />
           <Text
             variant="paragraph2bold"
+            color="tertiary.main"
           >
             5.2k
           </Text>
@@ -41,6 +46,7 @@ export function PostActions() {
           <CommentIcon size={24} />
           <Text
             variant="paragraph2bold"
+            color="tertiary.main"
           >
             1.2k
           </Text>

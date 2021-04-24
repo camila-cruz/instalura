@@ -84,7 +84,12 @@ export function PostComments({ description }) {
         </OverlappedAvatars>
       </Grid.Col>
       <PostDescription>
-        {description}
+        <Text
+          variant="paragraph2"
+          color="tertiary.main"
+        >
+          {description}
+        </Text>
       </PostDescription>
       <Grid.Col
         display="flex"

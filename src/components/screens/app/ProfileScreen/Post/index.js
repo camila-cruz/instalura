@@ -9,13 +9,16 @@ import { PostComments } from './PostComments';
 import { breakpointsMedia } from '../../../../../theme/utils/breakpointsMedia';
 
 const PostWrapper = styled.div`
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.background.light.color};
   margin-bottom: 40px;
   max-width: 100vw;
+  border-top: 1px solid ${({ theme }) => theme.colors.borders.main.color};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borders.main.color};
 
   ${breakpointsMedia({
     md: css`
       max-width: 600px;
+      border: 1px solid ${({ theme }) => theme.colors.borders.main.color};
     `,
   })}
 `;
