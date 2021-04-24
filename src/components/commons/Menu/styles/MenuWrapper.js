@@ -8,18 +8,18 @@ export const MenuWrapper = styled.nav`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 18px;
+  padding-top: 18px;
   padding-right: 28px;
   padding-left: 28px;
 
   ${breakpointsMedia({
     md: css`
       justify-content: flex-start;
-      margin-top: 32px;
+      padding: 0 16px;
+      padding-top: 32px;
       margin-left: auto;
       margin-right: auto;
       width: 100%;
-      padding: 0 16px;
       max-width: 768px;
     `,
     lg: css`
@@ -29,6 +29,17 @@ export const MenuWrapper = styled.nav`
       max-width: 1222px;
     `,
   })}
+  
+  ${({ hasActiveSession }) => hasActiveSession && breakpointsMedia({
+    xs: css`
+      background-color: ${({ theme }) => theme.colors.background.main.color};
+      padding-bottom: 16px;
+    `,
+    md: css`
+      background-color: ${({ theme }) => theme.colors.background.light.color};
+      padding-bottom: 32px;
+    `,
+  })}
 `;
 
 MenuWrapper.LeftSide = styled.div`
@@ -36,6 +47,12 @@ MenuWrapper.LeftSide = styled.div`
   margin: 0;
   order: 1;
 
+  ${({ hasActiveSession }) => hasActiveSession && breakpointsMedia({
+    xs: css`
+      width: 100%;
+      text-align: center;
+    `,
+  })}
   ${breakpointsMedia({
     md: css`
       width: 131px;

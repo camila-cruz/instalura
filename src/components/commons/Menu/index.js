@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { parseCookies } from 'nookies';
 import Logo from '../../../theme/Logo';
 import { Button } from '../Button';
 import { MenuWrapper } from './styles/MenuWrapper';
 import Link from '../Link';
+import { TabBar } from '../TabBar';
 
 const links = [
   {
@@ -20,7 +22,24 @@ const links = [
   },
 ];
 
-export default function Menu({ onCadastrarClick }) {
+export default function Menu({ onCadastrarClick, parseCookiesModule = parseCookies }) {
+  const { LOGIN_COOKIE_APP_TOKEN } = parseCookiesModule(null);
+
+  const hasActiveSession = Boolean(LOGIN_COOKIE_APP_TOKEN);
+
+  if (hasActiveSession) {
+    return (
+      <MenuWrapper hasActiveSession={hasActiveSession}>
+        <MenuWrapper.LeftSide hasActiveSession={hasActiveSession}>
+          <Logo />
+        </MenuWrapper.LeftSide>
+        <MenuWrapper.RightSide>
+          <TabBar />
+        </MenuWrapper.RightSide>
+      </MenuWrapper>
+    );
+  }
+
   return (
     <MenuWrapper>
       <MenuWrapper.LeftSide>
@@ -49,4 +68,5 @@ export default function Menu({ onCadastrarClick }) {
 
 Menu.propTypes = {
   onCadastrarClick: PropTypes.func.isRequired,
+  parseCookiesModule: PropTypes.func.isRequired,
 };
