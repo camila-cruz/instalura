@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Box } from '../../../foundation/layout/Box';
 import { Post } from './Post';
-import { TabBar } from './TabBar';
 import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';
@@ -29,6 +28,10 @@ export default function ProfileScreen({ posts }) {
         >
           <Grid.Row
             noMargin
+            marginTop={{
+              xs: '0px',
+              md: '24px',
+            }}
           >
             <Grid.Col
               value={{
@@ -101,7 +104,6 @@ export default function ProfileScreen({ posts }) {
           </Grid.Row>
         </Grid.Container>
       </Box>
-      <TabBar />
     </ProfileScreenWrapper>
   );
 }
