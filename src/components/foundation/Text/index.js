@@ -23,6 +23,7 @@ export const TextStyleVariantsMap = {
   subTitle: TextStyle('subTitle'),
   paragraph1: TextStyle('paragraph1'),
   paragraph2: TextStyle('paragraph2'),
+  paragraph1bold: TextStyle('paragraph1bold'),
   paragraph2bold: TextStyle('paragraph2bold'),
   smallestException: TextStyle('smallestException'),
 };
@@ -32,6 +33,8 @@ const TextBase = styled.span`
   color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
 
   ${propToStyle('textAlign')}
+  ${propToStyle('marginBottom')}
+  ${propToStyle('marginLeft')}
 `;
 
 export default function Text({

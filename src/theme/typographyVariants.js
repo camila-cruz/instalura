@@ -28,7 +28,13 @@ export const typographyVariants = {
     fontWeight: '400',
     lineHeight: 1.25, // 125%
   },
-  // [paragraph2]
+  // [paragraph1 - bold]
+  paragraph1bold: {
+    fontSize: '16px',
+    fontWeight: '500',
+    lineHeight: 1.25, // 125%
+  },
+  // [paragraph2 - bold]
   paragraph2bold: {
     fontSize: '14px',
     fontWeight: '500',
