@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { MoreHorizontalOutline as DotsIcon } from '@styled-icons/evaicons-outline/MoreHorizontalOutline';
 import { Avatar } from '../../../../../commons/Avatar';
 import { Grid } from '../../../../../foundation/layout/Grid';
 import Text from '../../../../../foundation/Text';
 
 const Nav = styled.div`
-  border: 1px solid red;
   display: flex;
   justify-content: space-around;
   
@@ -25,7 +25,7 @@ Nav.Menu = styled.div`
   justify-content: flex-end;
 `;
 
-export function PostNav() {
+export function PostNav({ user }) {
   return (
     <Nav>
       <Grid.Col
@@ -42,7 +42,7 @@ export function PostNav() {
           <Text
             variant="paragraph2bold"
           >
-            Nicolas Cage
+            {user}
           </Text>
         </Nav.UserInfo>
       </Grid.Col>
@@ -60,3 +60,7 @@ export function PostNav() {
     </Nav>
   );
 }
+
+PostNav.propTypes = {
+  user: PropTypes.string.isRequired,
+};

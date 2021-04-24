@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { breakpointsMedia } from '../../../../../../theme/utils/breakpointsMedia';
 
 const Image = styled.div`
-  border: 1px solid blue;
   padding: 0;
 
   ${breakpointsMedia({

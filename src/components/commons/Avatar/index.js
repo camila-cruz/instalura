@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const AvatarBase = styled.div`
   border-radius: 50%;
@@ -11,11 +12,14 @@ const AvatarBase = styled.div`
   & > img {
     width: inherit;
   }
+
+  ${propToStyle('height')}
+  ${propToStyle('width')}
 `;
 
 export function Avatar({ src, size, alt = 'usuário' }) {
   return (
-    <AvatarBase size={size}>
+    <AvatarBase height={size} width={size} size={size}>
       <img src={src} alt={`Avatar do ${alt}`} />
     </AvatarBase>
   );

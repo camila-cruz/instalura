@@ -36,6 +36,7 @@ const Container = styled.div`
   ${propToStyle('display')}
   ${propToStyle('flex')}
   ${propToStyle('alignItems')}
+  ${propToStyle('padding')}
 `;
 
 const Col = styled.div`
@@ -142,6 +143,11 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin-right: -16px;
   margin-left: -16px;
+
+  ${({ noMargin }) => noMargin && css`
+    margin-right: 0px;
+    margin-left: 0px;
+  `}
 
   ${propToStyle('flex')}
   ${propToStyle('justifyContent')}
