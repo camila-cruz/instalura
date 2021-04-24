@@ -52,6 +52,7 @@ export function PostNav({ user }) {
         }}
         display="flex"
         alignItems="center"
+        justifyContent="flex-end"
       >
         <Nav.Menu>
           <DotsIcon size={24} />
