@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import ProfileScreen from '../../src/components/screens/app/ProfileScreen';
-import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
-import { authService } from '../../src/services/auth/authService';
+import ProfileScreen from '../../../src/components/screens/app/ProfileScreen';
+import websitePageHOC from '../../../src/components/wrappers/WebsitePage/hoc';
+import { authService } from '../../../src/services/auth/authService';
 
-import { useUserService } from '../../src/services/user/hook';
+import { useUserService } from '../../../src/services/user/hook';
 
 function ProfilePage({ user }) {
   const dados = useUserService.getProfilePage();
