@@ -56,6 +56,7 @@ const FormImagemWrapper = styled.div`
   width: 100%;
   max-width: 375px;
   max-height: 702px;
+  position: relative;
 
   ${breakpointsMedia({
     md: css`
@@ -65,7 +66,7 @@ const FormImagemWrapper = styled.div`
 `;
 
 const ImagePlaceholder = styled.div`
-  margin-top: 56px;
+  margin-top: 48px;
   height: 100vw;
   max-height: 375px;
   max-width: 375px;
@@ -136,8 +137,8 @@ function FilterSection() {
 }
 
 // eslint-disable-next-line react/prop-types
-export default function FormImagem({ propsDoModal }) {
-  const [secondPage, setSecondPage] = useState(true);
+export default function FormImagem({ ModalCloseButton, propsDoModal }) {
+  const [secondPage, setSecondPage] = useState(false);
 
   function togglePage() {
     setSecondPage(!secondPage);
@@ -146,6 +147,7 @@ export default function FormImagem({ propsDoModal }) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FormImagemWrapper {...propsDoModal}>
+      <ModalCloseButton />
       <ImagePlaceholder />
       <Grid.Container
         marginTop={secondPage ? '24px' : '48px'}

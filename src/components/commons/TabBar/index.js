@@ -110,8 +110,8 @@ export function TabBar() {
   return (
     <TabBarWrapper>
       <Modal isOpen={isModalImagemOpen} onClose={() => setModalImagem(false)}>
-        {(propsDoModal) => (
-          <FormImagem propsDoModal={propsDoModal} />
+        {(ModalCloseButton, propsDoModal) => (
+          <FormImagem propsDoModal={propsDoModal} ModalCloseButton={ModalCloseButton} />
         )}
       </Modal>
       <Tab
