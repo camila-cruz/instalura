@@ -10,6 +10,8 @@ import { get } from 'lodash';
 import { Avatar } from '../Avatar';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
+import Modal from '../Modal';
+import FormImagem from '../../patterns/FormImagem';
 
 const TabBarWrapper = styled.div`
   position: fixed;
@@ -103,8 +105,15 @@ const Tab = styled.div`
 `;
 
 export function TabBar() {
+  const [isModalImagemOpen, setModalImagem] = React.useState(false);
+
   return (
     <TabBarWrapper>
+      <Modal isOpen={isModalImagemOpen} onClose={() => setModalImagem(false)}>
+        {(propsDoModal) => (
+          <FormImagem propsDoModal={propsDoModal} />
+        )}
+      </Modal>
       <Tab
         order={{
           md: 2,
@@ -125,6 +134,7 @@ export function TabBar() {
           md: 1,
         }}
         rounded
+        onClick={() => setModalImagem(true)}
       >
         <AddIcon />
       </Tab>
