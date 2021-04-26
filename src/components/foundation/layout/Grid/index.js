@@ -152,6 +152,7 @@ const Row = styled.div`
   ${propToStyle('flex')}
   ${propToStyle('justifyContent')}
   ${propToStyle('flexDirection')}
+  ${propToStyle('flexWrap')}
   ${propToStyle('marginTop')}
   ${propToStyle('marginLeft')}
   ${propToStyle('marginRight')}

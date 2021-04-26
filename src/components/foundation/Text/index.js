@@ -33,6 +33,7 @@ const TextBase = styled.span`
   color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
 
   ${propToStyle('textAlign')}
+  ${propToStyle('marginTop')}
   ${propToStyle('marginBottom')}
   ${propToStyle('marginLeft')}
 `;

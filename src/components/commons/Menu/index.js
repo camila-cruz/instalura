@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import { MenuWrapper } from './styles/MenuWrapper';
 import Link from '../Link';
 import { TabBar } from '../TabBar';
+import { Grid } from '../../foundation/layout/Grid';
 
 const links = [
   {
@@ -30,12 +31,32 @@ export default function Menu({ onCadastrarClick, parseCookiesModule = parseCooki
   if (hasActiveSession) {
     return (
       <MenuWrapper hasActiveSession={hasActiveSession}>
-        <MenuWrapper.LeftSide hasActiveSession={hasActiveSession}>
-          <Logo />
-        </MenuWrapper.LeftSide>
-        <MenuWrapper.RightSide>
-          <TabBar />
-        </MenuWrapper.RightSide>
+        <Grid.Col
+          value={{
+            xs: 12,
+            md: 2,
+          }}
+          offset={{
+            xs: 0,
+            md: 1,
+          }}
+        >
+          <MenuWrapper.LeftSide hasActiveSession={hasActiveSession}>
+            <Logo />
+          </MenuWrapper.LeftSide>
+        </Grid.Col>
+        <Grid.Col
+          value={{
+            md: 3,
+          }}
+          offset={{
+            md: 5,
+          }}
+        >
+          <MenuWrapper.RightSide>
+            <TabBar />
+          </MenuWrapper.RightSide>
+        </Grid.Col>
       </MenuWrapper>
     );
   }

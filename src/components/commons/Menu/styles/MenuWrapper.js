@@ -34,6 +34,7 @@ export const MenuWrapper = styled.nav`
     xs: css`
       background-color: ${({ theme }) => theme.colors.background.main.color};
       padding-bottom: 16px;
+      border-bottom: 1px solid ${({ theme }) => theme.colors.borders.main.color};
     `,
     md: css`
       background-color: ${({ theme }) => theme.colors.background.light.color};

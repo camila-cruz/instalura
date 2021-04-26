@@ -10,7 +10,7 @@ import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';
 
 const ProfileScreenWrapper = styled.div`
-  background-color: #e9e9e9;
+  background-color: ${({ theme }) => theme.colors.background.main.color};
   width: 100%;
   padding-bottom: 30px;
 `;
