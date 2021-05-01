@@ -97,14 +97,23 @@ export default function UserScreen() {
         columnGap={{ md: '10px' }}
       >
         <Grid.Col
-          value={{ xs: 3, md: 1 }}
+          value={{ xs: 3, md: 2, lg: 3 }}
           // offset={{ md: 3 }}
           // padding={0}
         >
-          <Avatar
-            src="https://via.placeholder.com/88"
-            size={70}
-          />
+          <Box
+            width={{
+              xs: '70px',
+              sm: '90px',
+              md: '120px',
+              lg: '188px',
+            }}
+          >
+            <Avatar
+              src="https://via.placeholder.com/110"
+              // size={70}
+            />
+          </Box>
         </Grid.Col>
         <UserStats
           statsCount="234"
@@ -119,7 +128,7 @@ export default function UserScreen() {
           statsTitle="Seguidores"
         />
         <Grid.Col
-          value={{ xs: 12, md: 12 }}
+          value={{ xs: 12, md: 6 }}
           display="flex"
           flexDirection="column"
           justifyContent="flex-start"
