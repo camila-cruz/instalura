@@ -8,17 +8,24 @@ import { Post } from './Post';
 import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';
+import { useUserService } from '../../../../services/user/hook';
 
-const ProfileScreenWrapper = styled.div`
+const FeedScreenWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.main.color};
   width: 100%;
   padding-bottom: 30px;
 `;
 
-export default function ProfileScreen({ posts }) {
-  // console.log(posts);
+export default function FeedScreen({ user }) {
+  const [posts, setPosts] = React.useState([]);
+  const dados = useUserService.getProfilePage();
+
+  React.useEffect(() => {
+    if (!dados.loading) setPosts(dados.data.posts.reverse());
+  }, [dados]);
+
   return (
-    <ProfileScreenWrapper>
+    <FeedScreenWrapper>
       <Box>
         <Grid.Container
           padding={{
@@ -48,7 +55,7 @@ export default function ProfileScreen({ posts }) {
               }}
             >
               {/* eslint-disable-next-line react/prop-types */}
-              {posts && posts.reverse().map((post) => <Post {...post} key={post._id} />)}
+              {posts && posts.map((post) => <Post {...post} key={post._id} />)}
             </Grid.Col>
             <Grid.Col
               display={{
@@ -62,10 +69,10 @@ export default function ProfileScreen({ posts }) {
               }}
             >
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/64"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
                 currentUser
               />
               <Text
@@ -77,38 +84,38 @@ export default function ProfileScreen({ posts }) {
                 Projetos da galera
               </Text>
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
       </Box>
-    </ProfileScreenWrapper>
+    </FeedScreenWrapper>
   );
 }
 
-ProfileScreen.propTypes = {
+FeedScreen.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  posts: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
 };

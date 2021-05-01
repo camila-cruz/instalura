@@ -1,56 +1,34 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import ProfileScreen from '../../../src/components/screens/app/ProfileScreen';
+import UserScreen from '../../../src/components/screens/app/UserScreen';
 import websitePageHOC from '../../../src/components/wrappers/WebsitePage/hoc';
 import { authService } from '../../../src/services/auth/authService';
+import { userService } from '../../../src/services/user/userService';
 
-import { useUserService } from '../../../src/services/user/hook';
-
-function ProfilePage({ user }) {
-  const dados = useUserService.getProfilePage();
-
-  // <pre>
-  //   {dados.loading && 'Carregando...'}
-  //   {!dados.loading && dados.data && 'Carregou com sucesso'}
-  //   {!dados.loading && dados.error}
-  //   {JSON.stringify(user, null, 4)}
-  // </pre>
-
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <ProfileScreen user={user.username} {...dados.data} />;
+function ActiveUserProfilePage({ userInfo, posts }) {
+  return <UserScreen userInfo={userInfo} posts={posts} />;
 }
 
-export default websitePageHOC(ProfilePage, {
+export default websitePageHOC(ActiveUserProfilePage, {
   pageWrapperProps: {
     seoProps: {
-      headTitle: 'Feed',
+      headTitle: 'Seu perfil',
     },
   },
 });
 
 export async function getServerSideProps(ctx) {
-  const auth = authService(ctx);
+  // const { id } = params;
+  const user = await authService(ctx).getSession();
+  const dados = await userService.getProfilePage(ctx);
 
-  const hasActiveSession = await auth.hasActiveSession();
+  const posts = dados.posts.filter((post) => post.user === user.id);
+  const { userInfo } = dados;
 
-  if (hasActiveSession) {
-    const session = await auth.getSession();
-    // const profilePage = await userService.getProfilePage(ctx);
-
-    return {
-      props: {
-        user: {
-          ...session,
-          // ...profilePage.user,
-        },
-        // posts: profilePage,
-      },
-    };
-  }
-
-  ctx.res.writeHead(307, { location: '/login' });
-  ctx.res.end();
   return {
-    props: {},
+    props: {
+      userInfo,
+      posts,
+    },
   };
 }

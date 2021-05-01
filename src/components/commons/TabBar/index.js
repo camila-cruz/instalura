@@ -13,7 +13,7 @@ import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 import Modal from '../Modal';
 import FormImagem from '../../patterns/FormImagem';
-import { authService } from '../../../services/auth/authService';
+// import { authService } from '../../../services/auth/authService';
 
 const TabBarWrapper = styled.div`
   position: fixed;
@@ -103,13 +103,13 @@ const Tab = styled.div`
 
 export function TabBar() {
   const [isModalImagemOpen, setModalImagem] = React.useState(false);
-  const [user, setUser] = React.useState({});
+  // const [user, setUser] = React.useState({});
 
-  React.useEffect(() => {
-    authService()
-      .getSession()
-      .then((data) => setUser(data));
-  }, []);
+  // React.useEffect(() => {
+  //   authService()
+  //     .getSession()
+  //     .then((data) => setUser(data));
+  // }, []);
 
   return (
     <TabBarWrapper>
@@ -157,8 +157,10 @@ export function TabBar() {
           md: 4,
         }}
       >
-        <NextLink href={`/app/profile/${user.id}`}>
-          <a href={`/app/profile/${user.id}`}>
+        {/* <NextLink href={`/app/profile/${user.id}`}>
+          <a href={`/app/profile/${user.id}`}> */}
+        <NextLink href="/app/profile/">
+          <a href="/app/profile/">
             <Avatar
               src="https://via.placeholder.com/32"
               size={{ xs: '24px', md: '32px' }}

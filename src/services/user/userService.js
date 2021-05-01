@@ -22,7 +22,10 @@ export const userService = {
 
       return {
         userInfo: {
-          totalLikes: 100,
+          bio: 'A wholesome person responsible for the best movies ever.',
+          totalPosts: 234,
+          totalFollowing: 22000,
+          totalFollowers: 134000,
         },
         posts: response.data,
       };
