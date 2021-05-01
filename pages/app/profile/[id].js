@@ -7,7 +7,7 @@ import websitePageHOC from '../../../src/components/wrappers/WebsitePage/hoc';
 
 // function OtherUsersProfilePage({ userInfo, posts }) {
 function OtherUsersProfilePage() {
-  return <UserScreen userInfo={{}} posts={{}} />;
+  return <UserScreen userInfo={[]} posts={[]} />;
 }
 
 export default websitePageHOC(OtherUsersProfilePage, {

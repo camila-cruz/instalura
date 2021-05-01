@@ -29,16 +29,21 @@ function UserStats({ statsCount, statsTitle }) {
   );
 }
 
+UserStats.defaultProps = {
+  statsCount: 0,
+};
+
 UserStats.propTypes = {
-  statsCount: PropTypes.number.isRequired,
+  statsCount: PropTypes.number,
   statsTitle: PropTypes.string.isRequired,
 };
 
-function UserPostsRow(posts) {
+function UserPostsRow(posts, index) {
   return (
-    <Grid.Row marginBottom={{ xs: '4px', md: '32px' }}>
-      {posts.map(() => (
-        <Grid.Col value={4} display="flex" justifyContent="center">
+    <Grid.Row marginBottom={{ xs: '4px', md: '32px' }} key={index}>
+      {posts.map((post) => (
+        // eslint-disable-next-line no-underscore-dangle
+        <Grid.Col value={4} display="flex" justifyContent="center" key={post._id}>
           <Box
             width={{
               xs: '95px',
@@ -48,7 +53,7 @@ function UserPostsRow(posts) {
             }}
           >
             <img
-              src="https://via.placeholder.com/300"
+              src={post.photoUrl}
               alt=""
               style={{
                 objectFit: 'cover',
@@ -62,12 +67,11 @@ function UserPostsRow(posts) {
   );
 }
 
-function UserPosts() {
-  const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-
+function UserPosts({ posts }) {
   const gridRowLength = 3;
 
-  const postsDividedByChunks = arr.reduce((chunk, item, index) => {
+  // eslint-disable-next-line react/prop-types
+  const postsDividedByChunks = posts.reduce((chunk, item, index) => {
     const chunkIndex = Math.floor(index / gridRowLength);
 
     if (!chunk[chunkIndex]) {
@@ -82,12 +86,17 @@ function UserPosts() {
 
   return (
     <Grid.Col value={{ md: 8 }} offset={{ md: 2 }}>
-      {postsDividedByChunks.map((postsChunk) => UserPostsRow(postsChunk))}
+      {postsDividedByChunks.map((postsChunk, index) => UserPostsRow(postsChunk, index))}
     </Grid.Col>
   );
 }
 
-export default function UserScreen() {
+UserPosts.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  posts: PropTypes.array.isRequired,
+};
+
+export default function UserScreen({ userInfo, posts }) {
   return (
     <Grid.Container
       marginTop={{ xs: '24px', md: '64px' }}
@@ -116,19 +125,19 @@ export default function UserScreen() {
           </Box>
         </Grid.Col>
         <UserStats
-          statsCount="234"
+          statsCount={userInfo.totalPosts}
           statsTitle="Publicações"
         />
         <UserStats
-          statsCount="22k"
+          statsCount={userInfo.totalFollowing}
           statsTitle="Seguindo"
         />
         <UserStats
-          statsCount="134k"
+          statsCount={userInfo.totalFollowers}
           statsTitle="Seguidores"
         />
         <Grid.Col
-          value={{ xs: 12, md: 6 }}
+          value={{ xs: 12, lg: 6 }}
           display="flex"
           flexDirection="column"
           justifyContent="flex-start"
@@ -144,7 +153,7 @@ export default function UserScreen() {
             variant="paragraph2"
             color="tertiary.light"
           >
-            A wholesome person responsible for the best movies ever.
+            {userInfo.bio}
           </Text>
         </Grid.Col>
       </Grid.Row>
@@ -153,8 +162,19 @@ export default function UserScreen() {
         flexWrap="wrap"
         justifyContent="space-between"
       >
-        <UserPosts />
+        <UserPosts posts={posts} />
       </Box>
     </Grid.Container>
   );
 }
+
+UserScreen.propTypes = {
+  userInfo: PropTypes.shape({
+    bio: PropTypes.string,
+    totalPosts: PropTypes.number,
+    totalFollowing: PropTypes.number,
+    totalFollowers: PropTypes.number,
+  }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  posts: PropTypes.array.isRequired,
+};

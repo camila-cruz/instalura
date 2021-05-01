@@ -6,7 +6,8 @@ import { authService } from '../../../src/services/auth/authService';
 import { userService } from '../../../src/services/user/userService';
 
 function ActiveUserProfilePage({ userInfo, posts }) {
-  return <UserScreen userInfo={userInfo} posts={posts} />;
+  const orderedPosts = posts.reverse();
+  return <UserScreen userInfo={userInfo} posts={orderedPosts} />;
 }
 
 export default websitePageHOC(ActiveUserProfilePage, {
