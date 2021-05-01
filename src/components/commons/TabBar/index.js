@@ -60,7 +60,7 @@ const Tab = styled.div`
   justify-content: center;
   align-items: center;
 
-  & > svg {
+  svg {
     fill: ${({ theme }) => theme.colors.tertiary.main.color};
     ${breakpointsMedia({
     xs: css`
@@ -90,7 +90,6 @@ const Tab = styled.div`
       ${propToStyle('size')}
     }
   `}
-    
 
   ${breakpointsMedia({
     md: css`
@@ -124,8 +123,11 @@ export function TabBar() {
           md: 2,
         }}
       >
-        {/* {TabIcon(HomeIcon)} */}
-        <HomeIcon />
+        <NextLink href="/app/feed/">
+          <a href="/app/feed/">
+            <HomeIcon />
+          </a>
+        </NextLink>
       </Tab>
       <Tab
         order={{
