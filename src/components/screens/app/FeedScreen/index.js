@@ -16,12 +16,12 @@ const FeedScreenWrapper = styled.div`
   padding-bottom: 30px;
 `;
 
-export default function FeedScreen() {
+export default function FeedScreen({ user }) {
   const [posts, setPosts] = React.useState([]);
   const dados = useUserService.getProfilePage();
 
   React.useEffect(() => {
-    if (!dados.loading) setPosts(dados.data.posts);
+    if (!dados.loading) setPosts(dados.data.posts.reverse());
   }, [dados]);
 
   return (
@@ -55,7 +55,7 @@ export default function FeedScreen() {
               }}
             >
               {/* eslint-disable-next-line react/prop-types */}
-              {posts && posts.reverse().map((post) => <Post {...post} key={post._id} />)}
+              {posts && posts.map((post) => <Post {...post} key={post._id} />)}
             </Grid.Col>
             <Grid.Col
               display={{
@@ -69,10 +69,10 @@ export default function FeedScreen() {
               }}
             >
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/64"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
                 currentUser
               />
               <Text
@@ -84,28 +84,28 @@ export default function FeedScreen() {
                 Projetos da galera
               </Text>
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
               <ProjectCard
-                username="omariosouto"
-                name="Mario Souto"
+                username={user.username}
+                name="Camila Cruz"
                 imageSrc="https://via.placeholder.com/48"
-                githubUrl="aaaaa"
+                githubUrl="https://github.com/camila-cruz"
               />
             </Grid.Col>
           </Grid.Row>
@@ -117,5 +117,5 @@ export default function FeedScreen() {
 
 FeedScreen.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  posts: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
 };
