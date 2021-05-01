@@ -39,7 +39,23 @@ function UserPostsRow(posts) {
     <Grid.Row marginBottom={{ xs: '4px', md: '32px' }}>
       {posts.map(() => (
         <Grid.Col value={4} display="flex" justifyContent="center">
-          <img src="https://via.placeholder.com/95" alt="" />
+          <Box
+            width={{
+              xs: '95px',
+              sm: '120px',
+              md: '150px',
+              lg: '250px',
+            }}
+          >
+            <img
+              src="https://via.placeholder.com/300"
+              alt=""
+              style={{
+                objectFit: 'cover',
+                width: 'inherit',
+              }}
+            />
+          </Box>
         </Grid.Col>
       ))}
     </Grid.Row>
