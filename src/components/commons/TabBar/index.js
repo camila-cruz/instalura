@@ -7,11 +7,13 @@ import {
   HeartOutline as HeartIcon,
 } from '@styled-icons/evaicons-outline';
 import { get } from 'lodash';
+import NextLink from 'next/link';
 import { Avatar } from '../Avatar';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 import Modal from '../Modal';
 import FormImagem from '../../patterns/FormImagem';
+import { authService } from '../../../services/auth/authService';
 
 const TabBarWrapper = styled.div`
   position: fixed;
@@ -50,10 +52,6 @@ const TabBarWrapper = styled.div`
   })}
 `;
 
-// const TabIcon = (icon) => styled(icon)`
-//   fill: ${({ theme }) => theme.colors.tertiary.main.color};
-// `;
-
 const Tab = styled.div`
   height: 40px;
   width: 40px;
@@ -62,7 +60,7 @@ const Tab = styled.div`
   justify-content: center;
   align-items: center;
 
-  & > svg {
+  svg {
     fill: ${({ theme }) => theme.colors.tertiary.main.color};
     ${breakpointsMedia({
     xs: css`
@@ -92,7 +90,6 @@ const Tab = styled.div`
       ${propToStyle('size')}
     }
   `}
-    
 
   ${breakpointsMedia({
     md: css`
@@ -106,6 +103,13 @@ const Tab = styled.div`
 
 export function TabBar() {
   const [isModalImagemOpen, setModalImagem] = React.useState(false);
+  const [user, setUser] = React.useState({});
+
+  React.useEffect(() => {
+    authService()
+      .getSession()
+      .then((data) => setUser(data));
+  }, []);
 
   return (
     <TabBarWrapper>
@@ -119,8 +123,11 @@ export function TabBar() {
           md: 2,
         }}
       >
-        {/* {TabIcon(HomeIcon)} */}
-        <HomeIcon />
+        <NextLink href="/app/feed/">
+          <a href="/app/feed/">
+            <HomeIcon />
+          </a>
+        </NextLink>
       </Tab>
       <Tab
         order={{
@@ -150,7 +157,14 @@ export function TabBar() {
           md: 4,
         }}
       >
-        <Avatar src="https://via.placeholder.com/32" size={{ xs: '24px', md: '32px' }} />
+        <NextLink href={`/app/profile/${user.id}`}>
+          <a href={`/app/profile/${user.id}`}>
+            <Avatar
+              src="https://via.placeholder.com/32"
+              size={{ xs: '24px', md: '32px' }}
+            />
+          </a>
+        </NextLink>
       </Tab>
     </TabBarWrapper>
   );
