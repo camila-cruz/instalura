@@ -44,7 +44,11 @@ export function ProjectCard({
       <Grid.Col
         value={2}
       >
-        <Avatar src={imageSrc} size={currentUser ? 64 : 48} />
+        <Avatar
+          src={imageSrc}
+          size={currentUser ? 64 : 48}
+          alt={`Foto de perfil do usuário ${username}`}
+        />
       </Grid.Col>
       <Grid.Col
         value={7}
