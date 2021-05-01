@@ -164,6 +164,7 @@ export function TabBar() {
             <Avatar
               src="https://via.placeholder.com/32"
               size={{ xs: '24px', md: '32px' }}
+              alt="Ir para a sua página de perfil"
             />
           </a>
         </NextLink>

@@ -120,7 +120,8 @@ export default function UserScreen({ userInfo, posts }) {
           >
             <Avatar
               src="https://via.placeholder.com/110"
-              // size={70}
+              alt="Foto de perfil deste usuário"
+              size="inherit"
             />
           </Box>
         </Grid.Col>

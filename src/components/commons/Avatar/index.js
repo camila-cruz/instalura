@@ -30,7 +30,11 @@ const AvatarBase = styled.div`
 
 export function Avatar({ src, size = 'inherit', alt = 'usuário' }) {
   return (
-    <AvatarBase height={size} width={size} size={size}>
+    <AvatarBase
+      height={size}
+      width={size}
+      size={typeof size === 'object' ? '' : size}
+    >
       <img src={src} alt={`Avatar do ${alt}`} />
     </AvatarBase>
   );
@@ -38,6 +42,7 @@ export function Avatar({ src, size = 'inherit', alt = 'usuário' }) {
 
 Avatar.propTypes = {
   src: PropTypes.string.isRequired,
-  size: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  size: PropTypes.any.isRequired,
   alt: PropTypes.string.isRequired,
 };
