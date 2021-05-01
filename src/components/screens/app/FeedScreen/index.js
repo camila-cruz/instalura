@@ -8,17 +8,24 @@ import { Post } from './Post';
 import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';
+import { useUserService } from '../../../../services/user/hook';
 
-const ProfileScreenWrapper = styled.div`
+const FeedScreenWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.main.color};
   width: 100%;
   padding-bottom: 30px;
 `;
 
-export default function ProfileScreen({ posts }) {
-  // console.log(posts);
+export default function FeedScreen() {
+  const [posts, setPosts] = React.useState([]);
+  const dados = useUserService.getProfilePage();
+
+  React.useEffect(() => {
+    if (!dados.loading) setPosts(dados.data.posts);
+  }, [dados]);
+
   return (
-    <ProfileScreenWrapper>
+    <FeedScreenWrapper>
       <Box>
         <Grid.Container
           padding={{
@@ -104,11 +111,11 @@ export default function ProfileScreen({ posts }) {
           </Grid.Row>
         </Grid.Container>
       </Box>
-    </ProfileScreenWrapper>
+    </FeedScreenWrapper>
   );
 }
 
-ProfileScreen.propTypes = {
+FeedScreen.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   posts: PropTypes.array.isRequired,
 };

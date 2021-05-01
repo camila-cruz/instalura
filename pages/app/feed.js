@@ -1,14 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import ProfileScreen from '../../../src/components/screens/app/ProfileScreen';
-import websitePageHOC from '../../../src/components/wrappers/WebsitePage/hoc';
-import { authService } from '../../../src/services/auth/authService';
+import FeedScreen from '../../src/components/screens/app/FeedScreen';
+import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
+import { authService } from '../../src/services/auth/authService';
 
-import { useUserService } from '../../../src/services/user/hook';
-
-function ProfilePage({ user }) {
-  const dados = useUserService.getProfilePage();
-
+function FeedPage({ user }) {
   // <pre>
   //   {dados.loading && 'Carregando...'}
   //   {!dados.loading && dados.data && 'Carregou com sucesso'}
@@ -17,10 +13,10 @@ function ProfilePage({ user }) {
   // </pre>
 
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <ProfileScreen user={user.username} {...dados.data} />;
+  return <FeedScreen user={user} />;
 }
 
-export default websitePageHOC(ProfilePage, {
+export default websitePageHOC(FeedPage, {
   pageWrapperProps: {
     seoProps: {
       headTitle: 'Feed',
