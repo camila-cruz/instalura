@@ -8,7 +8,7 @@ import { Box } from '../../../foundation/layout/Box';
 function UserStats({ statsCount, statsTitle }) {
   return (
     <Grid.Col
-      value={{ xs: 3 }}
+      value={{ xs: 3, md: 1 }}
       display="flex"
       flexDirection="column"
       justifyContent="center"
@@ -34,25 +34,86 @@ UserStats.propTypes = {
   statsTitle: PropTypes.string.isRequired,
 };
 
+function UserPostsRow(posts) {
+  return (
+    <Grid.Row marginBottom={{ xs: '4px', md: '32px' }}>
+      {posts.map(() => (
+        <Grid.Col value={4} display="flex" justifyContent="center">
+          <Box
+            width={{
+              xs: '95px',
+              sm: '120px',
+              md: '150px',
+              lg: '250px',
+            }}
+          >
+            <img
+              src="https://via.placeholder.com/300"
+              alt=""
+              style={{
+                objectFit: 'cover',
+                width: 'inherit',
+              }}
+            />
+          </Box>
+        </Grid.Col>
+      ))}
+    </Grid.Row>
+  );
+}
+
 function UserPosts() {
   const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+  const gridRowLength = 3;
+
+  const postsDividedByChunks = arr.reduce((chunk, item, index) => {
+    const chunkIndex = Math.floor(index / gridRowLength);
+
+    if (!chunk[chunkIndex]) {
+      // eslint-disable-next-line no-param-reassign
+      chunk[chunkIndex] = []; // start a new chunk
+    }
+
+    chunk[chunkIndex].push(item);
+
+    return chunk;
+  }, []);
+
   return (
-    arr.map(() => <img src="https://via.placeholder.com/95" alt="" />)
+    <Grid.Col value={{ md: 8 }} offset={{ md: 2 }}>
+      {postsDividedByChunks.map((postsChunk) => UserPostsRow(postsChunk))}
+    </Grid.Col>
   );
 }
 
 export default function UserScreen() {
   return (
-    <Grid.Container>
-      <Grid.Row>
+    <Grid.Container
+      marginTop={{ xs: '24px', md: '64px' }}
+    >
+      <Grid.Row
+        justifyContent="center"
+        columnGap={{ md: '10px' }}
+      >
         <Grid.Col
-          value={{ xs: 3 }}
+          value={{ xs: 3, md: 2, lg: 3 }}
+          // offset={{ md: 3 }}
           // padding={0}
         >
-          <Avatar
-            src="https://via.placeholder.com/88"
-            size={70}
-          />
+          <Box
+            width={{
+              xs: '70px',
+              sm: '90px',
+              md: '120px',
+              lg: '188px',
+            }}
+          >
+            <Avatar
+              src="https://via.placeholder.com/110"
+              // size={70}
+            />
+          </Box>
         </Grid.Col>
         <UserStats
           statsCount="234"
@@ -67,7 +128,7 @@ export default function UserScreen() {
           statsTitle="Seguidores"
         />
         <Grid.Col
-          value={{ xs: 12, md: 12 }}
+          value={{ xs: 12, md: 6 }}
           display="flex"
           flexDirection="column"
           justifyContent="flex-start"

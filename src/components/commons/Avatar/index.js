@@ -1,23 +1,34 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const AvatarBase = styled.div`
-  border-radius: 50%;
-  height: ${({ size }) => size}px;
-  width: ${({ size }) => size}px;
-  clip-path: circle(50% at 50% 50%);
+  ${({ size }) => {
+    if (typeof size === 'number') {
+      return css`
+        height: ${size}px;
+        width: ${size}px;
+      `;
+    }
+    return css`
+      height: ${size};
+      width: ${size};
+    `;
+  }}
+
+  /* clip-path: circle(50% at 50% 50%); */
   
   & > img {
     width: inherit;
+    border-radius: 50%;
   }
 
   ${propToStyle('height')}
   ${propToStyle('width')}
 `;
 
-export function Avatar({ src, size, alt = 'usuário' }) {
+export function Avatar({ src, size = 'inherit', alt = 'usuário' }) {
   return (
     <AvatarBase height={size} width={size} size={size}>
       <img src={src} alt={`Avatar do ${alt}`} />

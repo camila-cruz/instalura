@@ -129,6 +129,7 @@ const Col = styled.div`
   ${propToStyle('alignItems')}
   ${propToStyle('justifyContent')}
   ${propToStyle('paddingRight')}
+  ${propToStyle('paddingLeft')}
   ${propToStyle('padding')}
   ${propToStyle('order')}
 `;
@@ -157,6 +158,7 @@ const Row = styled.div`
   ${propToStyle('marginLeft')}
   ${propToStyle('marginRight')}
   ${propToStyle('marginBottom')}
+  ${propToStyle('columnGap')}
 `;
 
 // eslint-disable-next-line import/prefer-default-export
