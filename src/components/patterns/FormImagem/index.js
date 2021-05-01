@@ -6,6 +6,8 @@ import TextField from '../../forms/TextField';
 import { Button } from '../../commons/Button';
 import { Grid } from '../../foundation/layout/Grid';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
+import { useForm } from '../../../infra/hooks/forms/useForm';
+import { postService } from '../../../services/post/postService';
 
 const FILTERS = [
   '1977',
@@ -73,11 +75,17 @@ const ImagePlaceholder = styled.div`
   border: 1px solid black;
 `;
 
-function InputSection() {
+function InputSection({ form, onSubmit }) {
   return (
-    <>
+    <form id="formImagem" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
+        name="imageUrl"
         placeholder="URL da Imagem"
+        value={form.values.photoUrl}
+        onChange={form.handleChange}
+        isTouched={form.touched.usuario}
+        error={form.errors.usuario}
+        onBlur={form.handleBlur}
       />
       <Text
         variant="paragraph2"
@@ -87,9 +95,15 @@ function InputSection() {
       >
         Formatos suportados: jpg, png, svg e xpto.
       </Text>
-    </>
+    </form>
   );
 }
+
+InputSection.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  form: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 function FilterPlaceholder({ filter }) {
   return (
@@ -140,6 +154,37 @@ function FilterSection() {
 export default function FormImagem({ ModalCloseButton, propsDoModal }) {
   const [secondPage, setSecondPage] = useState(false);
 
+  const postSchema = {};
+
+  const form = useForm({
+    initialValues: {
+      photoUrl: '',
+      description: 'ma oe',
+      filter: '',
+    },
+    onSubmit: (values) => {
+      form.setIsFormDisabled(true);
+      postService.post({
+        photoUrl: values.photoUrl,
+        description: values.description,
+        filter: values.filter,
+      })
+        .then(() => {
+          // Mensagem de sucesso
+          console.log('sucesso!');
+        })
+        .catch(() => {
+          // Faça alguma coisa com o erro
+          form.setIsFormDisabled(false);
+        });
+    },
+    async validateSchema(values) {
+      return postSchema.validate(values, {
+        abortEarly: false,
+      });
+    },
+  });
+
   function togglePage() {
     setSecondPage(!secondPage);
   }
@@ -158,8 +203,8 @@ export default function FormImagem({ ModalCloseButton, propsDoModal }) {
             flexDirection="column"
           >
             {(secondPage
-              && <FilterSection />)
-              || <InputSection />}
+              && <FilterSection form={form} />)
+              || <InputSection form={form} onSubmit={form.handleSubmit} />}
 
             <Button
               variant="primary.main"
@@ -180,3 +225,11 @@ export default function FormImagem({ ModalCloseButton, propsDoModal }) {
     </FormImagemWrapper>
   );
 }
+
+FormImagem.defaultProps = {
+  onSubmit: null,
+};
+
+FormImagem.propTypes = {
+  onSubmit: PropTypes.func,
+};

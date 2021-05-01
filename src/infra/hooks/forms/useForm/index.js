@@ -33,11 +33,11 @@ export function useForm({ initialValues, onSubmit, validateSchema }) {
   useEffect(() => {
     validateValues(values);
 
-    if (values.usuario.length > 0) {
-      setIsFormDisabled(false);
-    } else {
-      setIsFormDisabled(true);
-    }
+    // if (values.usuario.length > 0) {
+    //   setIsFormDisabled(false);
+    // } else {
+    //   setIsFormDisabled(true);
+    // }
   }, [values]);
 
   return {
