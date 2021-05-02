@@ -6,7 +6,6 @@ import {
   PlusOutline as AddIcon,
   HeartOutline as HeartIcon,
 } from '@styled-icons/evaicons-outline';
-import { get } from 'lodash';
 import NextLink from 'next/link';
 import { Avatar } from '../Avatar';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
@@ -59,6 +58,13 @@ const Tab = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+
+  transition: 0.3s ease;
+
+  &:hover {
+    opacity: 0.6;
+  }
 
   svg {
     fill: ${({ theme }) => theme.colors.tertiary.main.color};
@@ -85,9 +91,13 @@ const Tab = styled.div`
   `};
 
   ${({ selected }) => selected && css`
-    & > svg {
-      fill: ${(props) => get(props.theme, `colors.${props.variant}.color`)};
+    svg {
+      fill: ${({ theme }) => theme.colors.primary.main.color};
       ${propToStyle('size')}
+    }
+
+    img {
+      border: 2px solid ${({ theme }) => theme.colors.primary.main.color};
     }
   `}
 
@@ -103,6 +113,7 @@ const Tab = styled.div`
 
 export function TabBar() {
   const [isModalImagemOpen, setModalImagem] = React.useState(false);
+  const [tabSelected, setTabSelected] = React.useState('home');
   // const [user, setUser] = React.useState({});
 
   // React.useEffect(() => {
@@ -119,9 +130,11 @@ export function TabBar() {
         )}
       </Modal>
       <Tab
+        selected={tabSelected === 'home'}
         order={{
           md: 2,
         }}
+        onClick={() => setTabSelected('home')}
       >
         <NextLink href="/app/feed/">
           <a href="/app/feed/">
@@ -130,32 +143,42 @@ export function TabBar() {
         </NextLink>
       </Tab>
       <Tab
+        selected={tabSelected === 'search'}
         order={{
           md: 0,
         }}
+        onClick={() => setTabSelected('search')}
       >
         <SearchIcon />
       </Tab>
       <Tab
+        selected={tabSelected === 'new-post'}
         order={{
           md: 1,
         }}
+        onClick={() => {
+          setTabSelected('new-post');
+          setModalImagem(true);
+        }}
         rounded
-        onClick={() => setModalImagem(true)}
       >
         <AddIcon />
       </Tab>
       <Tab
+        selected={tabSelected === 'favorites'}
         order={{
           md: 3,
         }}
+        onClick={() => setTabSelected('favorites')}
       >
         <HeartIcon />
       </Tab>
       <Tab
+        selected={tabSelected === 'profile'}
         order={{
           md: 4,
         }}
+        onClick={() => setTabSelected('profile')}
       >
         {/* <NextLink href={`/app/profile/${user.id}`}>
           <a href={`/app/profile/${user.id}`}> */}

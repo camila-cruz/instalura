@@ -34,7 +34,7 @@ export default function LoginForm({ onSubmit }) {
         password: values.senha,
       })
         .then(() => {
-          router.push('/app/profile');
+          router.push('/app/feed');
         })
         .catch(() => {
           // Faça alguma coisa com o erro

@@ -24,7 +24,13 @@ const links = [
 ];
 
 export default function Menu({ onCadastrarClick }) {
-  const hasActiveSession = authService(null).hasActiveSession();
+  const [hasActiveSession, setHasActiveSession] = React.useState(false);
+
+  React.useEffect(() => {
+    authService(null)
+      .hasActiveSession()
+      .then((status) => setHasActiveSession(status));
+  }, []);
 
   if (hasActiveSession) {
     return (
