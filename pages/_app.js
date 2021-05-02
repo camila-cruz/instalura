@@ -2,6 +2,8 @@
 import React from 'react';
 import Head from 'next/head';
 
+import '../static/instagram.css';
+
 export default function App({ Component, pageProps }) {
   return (
     <>
