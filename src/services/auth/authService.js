@@ -19,6 +19,8 @@ export function authService(ctx) {
       return token;
     },
     async hasActiveSession() {
+      if (!token) return false;
+
       return HttpClient(`${BASE_URL}/api/auth`, {
         method: 'POST',
         headers: {
