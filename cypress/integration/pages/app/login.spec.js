@@ -5,7 +5,7 @@ import LoginScreenPageObject from '../../../../src/components/screens/app/LoginS
 describe('/pages/app/login', () => {
   describe('when fill and submit a form login request', () => {
     // it é o teste que estamos fazendo
-    it('goes to the profile page', () => {
+    it('goes to the feed page', () => {
       /* Pré-teste */
       cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
         .as('userLogin');
@@ -19,7 +19,7 @@ describe('/pages/app/login', () => {
 
       /* Asserções */
       // O que esperamos? Ir para /app/profile
-      cy.url().should('include', '/app/profile');
+      cy.url().should('include', '/app/feed');
 
       // Temos o token?
       cy.wait('@userLogin')
