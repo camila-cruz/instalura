@@ -39,18 +39,21 @@ UserStats.propTypes = {
 };
 
 function UserPostsRow(posts, index) {
+  const sizes = {
+    xs: '95px',
+    sm: '120px',
+    md: '150px',
+    lg: '250px',
+  };
+
   return (
     <Grid.Row marginBottom={{ xs: '4px', md: '32px' }} key={index}>
       {posts.map((post) => (
         // eslint-disable-next-line no-underscore-dangle
         <Grid.Col value={4} display="flex" justifyContent="center" key={post._id}>
           <Box
-            width={{
-              xs: '95px',
-              sm: '120px',
-              md: '150px',
-              lg: '250px',
-            }}
+            width={sizes}
+            height={sizes}
           >
             <img
               src={post.photoUrl}
@@ -58,6 +61,7 @@ function UserPostsRow(posts, index) {
               style={{
                 objectFit: 'cover',
                 width: 'inherit',
+                height: '100%',
               }}
             />
           </Box>
