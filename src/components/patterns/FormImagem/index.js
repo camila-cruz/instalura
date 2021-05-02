@@ -105,9 +105,9 @@ ImagePlaceholder.propTypes = {
   filter: PropTypes.string.isRequired,
 };
 
-function InputSection({ form, onSubmit }) {
+function InputSection({ form }) {
   return (
-    <form id="formImagem" onSubmit={onSubmit || form.handleSubmit}>
+    <>
       <TextField
         name="photoUrl"
         placeholder="URL da Imagem"
@@ -139,14 +139,13 @@ function InputSection({ form, onSubmit }) {
       >
         Formatos suportados: jpg, png, svg e xpto.
       </Text>
-    </form>
+    </>
   );
 }
 
 InputSection.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   form: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
 };
 
 const FilterWrapper = styled.div`
@@ -224,8 +223,33 @@ FilterSection.propTypes = {
   setSelectedFilter: PropTypes.func.isRequired,
 };
 
+function ButtonForm({ isSecondPage, children, onClick }) {
+  return (
+    <Button
+      variant="primary.main"
+      margin={isSecondPage ? '24px 0px 32px 0px' : '38px 0px 32px 0px'}
+      onClick={onClick}
+      style={{ width: '100%' }}
+    >
+      <Text
+        variant="paragraph2bold"
+        style={{ color: 'white' }}
+      >
+        {/* {(isSecondPage && 'Postar') || 'Avançar'} */}
+        {children}
+      </Text>
+    </Button>
+  );
+}
+
+ButtonForm.propTypes = {
+  isSecondPage: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 // eslint-disable-next-line react/prop-types
-export default function FormImagem({ ModalCloseButton, propsDoModal }) {
+export default function FormImagem({ ModalCloseButton, propsDoModal, onSubmit }) {
   const [secondPage, setSecondPage] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('');
 
@@ -265,8 +289,10 @@ export default function FormImagem({ ModalCloseButton, propsDoModal }) {
   }
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <FormImagemWrapper {...propsDoModal}>
+    <FormImagemWrapper
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...propsDoModal}
+    >
       <ModalCloseButton />
       <ImagePlaceholder url={form.values.photoUrl} filter={selectedFilter} />
       <Grid.Container
@@ -279,26 +305,31 @@ export default function FormImagem({ ModalCloseButton, propsDoModal }) {
           >
             {(secondPage
               && (
-              <FilterSection
-                form={form}
-                photoUrl={form.values.photoUrl}
-                setSelectedFilter={setSelectedFilter}
-              />
-              ))
-              || <InputSection form={form} onSubmit={form.handleSubmit} />}
-
-            <Button
-              variant="primary.main"
-              margin={secondPage ? '24px 0px 32px 0px' : '38px 0px 32px 0px'}
-              onClick={() => togglePage()}
-            >
-              <Text
-                variant="paragraph2bold"
-                style={{ color: 'white' }}
-              >
-                {(secondPage && 'Postar') || 'Avançar'}
-              </Text>
-            </Button>
+                <form
+                  id="formImagem"
+                  onSubmit={onSubmit || form.handleSubmit}
+                >
+                  <FilterSection
+                    form={form}
+                    photoUrl={form.values.photoUrl}
+                    setSelectedFilter={setSelectedFilter}
+                  />
+                  <ButtonForm type="submit" isSecondPage={secondPage}>
+                    Postar
+                  </ButtonForm>
+                </form>
+              )) || (
+                <>
+                  <InputSection form={form} />
+                  <ButtonForm
+                    type="button"
+                    onClick={() => togglePage()}
+                    isSecondPage={secondPage}
+                  >
+                    Avançar
+                  </ButtonForm>
+                </>
+            )}
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
