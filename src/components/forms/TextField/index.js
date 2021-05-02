@@ -5,6 +5,7 @@ import Text from '../../foundation/Text';
 
 const InputWrapper = styled.div`
   margin-bottom: 17px;
+  position: relative;
 `;
 
 const Input = styled(Text)`
@@ -35,6 +36,7 @@ export default function TextField({
   value,
   error,
   isTouched,
+  children,
   ...props
 }) {
   const hasError = Boolean(error);
@@ -53,6 +55,7 @@ export default function TextField({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
+      {children}
       {isFieldInvalid && (
         <Text
           variant="smallestException"
@@ -69,6 +72,7 @@ export default function TextField({
 TextField.defaultProps = {
   error: '',
   isTouched: false,
+  children: null,
 };
 
 TextField.propTypes = {
@@ -78,4 +82,5 @@ TextField.propTypes = {
   isTouched: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  children: PropTypes.node,
 };

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { ArrowForwardOutline as ArrowIcon } from '@styled-icons/evaicons-outline/ArrowForwardOutline';
 import Text from '../../foundation/Text';
 import TextField from '../../forms/TextField';
 import { Button } from '../../commons/Button';
 import { Grid } from '../../foundation/layout/Grid';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
+import { useForm } from '../../../infra/hooks/forms/useForm';
+import { postService } from '../../../services/post/postService';
 
 const FILTERS = [
+  'nenhum',
   '1977',
   'aden',
   'amaro',
@@ -65,20 +69,68 @@ const FormImagemWrapper = styled.div`
   })}
 `;
 
-const ImagePlaceholder = styled.div`
+const ImagePlaceholderWrapper = styled.div`
   margin-top: 48px;
   height: 100vw;
   max-height: 375px;
   max-width: 375px;
-  border: 1px solid black;
+
+  figure {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 `;
 
-function InputSection() {
+function ImagePlaceholder({ url, filter }) {
+  const photoUrl = url || 'https://via.placeholder.com/200';
+
+  return (
+    <ImagePlaceholderWrapper>
+      <figure className={`filter-${filter}`}>
+        <img src={photoUrl} alt="" />
+      </figure>
+    </ImagePlaceholderWrapper>
+  );
+}
+
+ImagePlaceholder.propTypes = {
+  url: PropTypes.string.isRequired,
+  filter: PropTypes.string.isRequired,
+};
+
+function InputSection({ form }) {
   return (
     <>
       <TextField
+        name="photoUrl"
         placeholder="URL da Imagem"
-      />
+        value={form.values.photoUrl}
+        onChange={form.handleChange}
+        isTouched={form.touched.usuario}
+        error={form.errors.usuario}
+        onBlur={form.handleBlur}
+      >
+        <Button
+          variant="secondary.main"
+          onClick={() => {}}
+          style={{
+            position: 'absolute',
+            right: '0px',
+            height: '100%',
+            width: '48px',
+            padding: '12px 12px',
+          }}
+        >
+          <ArrowIcon size={24} fill="white" />
+        </Button>
+      </TextField>
       <Text
         variant="paragraph2"
         color="tertiary.light"
@@ -91,18 +143,39 @@ function InputSection() {
   );
 }
 
-function FilterPlaceholder({ filter }) {
+InputSection.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  form: PropTypes.object.isRequired,
+};
+
+const FilterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+  cursor: pointer;
+
+  figure {
+    margin: 0;
+    height: 88px;
+    width: 88px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+`;
+
+function FilterPlaceholder({ filter, photoUrl, setSelectedFilter }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        rowGap: '12px',
-      }}
+    <FilterWrapper
+      onClick={() => setSelectedFilter(filter)}
     >
-      <figure className={`filter-${filter}`} style={{ margin: 0 }}>
-        <img src="https://via.placeholder.com/88" alt="" />
+      <figure className={`filter-${filter}`}>
+        {/* <img src="https://via.placeholder.com/88" alt="" /> */}
+        <img src={photoUrl} alt="" />
       </figure>
       <Text
         variant="smallestException"
@@ -110,15 +183,17 @@ function FilterPlaceholder({ filter }) {
       >
         {filter}
       </Text>
-    </div>
+    </FilterWrapper>
   );
 }
 
 FilterPlaceholder.propTypes = {
   filter: PropTypes.string.isRequired,
+  photoUrl: PropTypes.string.isRequired,
+  setSelectedFilter: PropTypes.func.isRequired,
 };
 
-function FilterSection() {
+function FilterSection({ photoUrl, setSelectedFilter }) {
   return (
     <div
       style={{
@@ -130,25 +205,96 @@ function FilterSection() {
         overflowY: 'hidden',
       }}
     >
-      {FILTERS.map((filter) => <FilterPlaceholder filter={filter} />)}
+      {FILTERS.map((filterOption) => (
+        <FilterPlaceholder
+          filter={filterOption}
+          photoUrl={photoUrl}
+          setSelectedFilter={setSelectedFilter}
+          key={filterOption}
+        />
+      ))}
     </div>
     // <FilterPlaceholder filter="" />
   );
 }
 
+FilterSection.propTypes = {
+  photoUrl: PropTypes.string.isRequired,
+  setSelectedFilter: PropTypes.func.isRequired,
+};
+
+function ButtonForm({ isSecondPage, children, onClick }) {
+  return (
+    <Button
+      variant="primary.main"
+      margin={isSecondPage ? '24px 0px 32px 0px' : '38px 0px 32px 0px'}
+      onClick={onClick}
+      style={{ width: '100%' }}
+    >
+      <Text
+        variant="paragraph2bold"
+        style={{ color: 'white' }}
+      >
+        {/* {(isSecondPage && 'Postar') || 'Avançar'} */}
+        {children}
+      </Text>
+    </Button>
+  );
+}
+
+ButtonForm.propTypes = {
+  isSecondPage: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 // eslint-disable-next-line react/prop-types
-export default function FormImagem({ ModalCloseButton, propsDoModal }) {
+export default function FormImagem({ ModalCloseButton, propsDoModal, onSubmit }) {
   const [secondPage, setSecondPage] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState('');
+
+  const postSchema = {};
+
+  const form = useForm({
+    initialValues: {
+      photoUrl: '',
+      description: 'ma oe',
+      filter: selectedFilter,
+    },
+    onSubmit: (values) => {
+      form.setIsFormDisabled(true);
+      postService.post({
+        photoUrl: values.photoUrl,
+        description: values.description,
+        filter: selectedFilter,
+      })
+        .then(() => {
+          // Mensagem de sucesso
+          console.log('sucesso!');
+        })
+        .catch(() => {
+          // Faça alguma coisa com o erro
+          form.setIsFormDisabled(false);
+        });
+    },
+    async validateSchema(values) {
+      return postSchema.validate(values, {
+        abortEarly: false,
+      });
+    },
+  });
 
   function togglePage() {
     setSecondPage(!secondPage);
   }
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <FormImagemWrapper {...propsDoModal}>
+    <FormImagemWrapper
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...propsDoModal}
+    >
       <ModalCloseButton />
-      <ImagePlaceholder />
+      <ImagePlaceholder url={form.values.photoUrl} filter={selectedFilter} />
       <Grid.Container
         marginTop={secondPage ? '24px' : '48px'}
       >
@@ -158,21 +304,32 @@ export default function FormImagem({ ModalCloseButton, propsDoModal }) {
             flexDirection="column"
           >
             {(secondPage
-              && <FilterSection />)
-              || <InputSection />}
-
-            <Button
-              variant="primary.main"
-              margin={secondPage ? '24px 0px 32px 0px' : '38px 0px 32px 0px'}
-              onClick={() => togglePage()}
-            >
-              <Text
-                variant="paragraph2bold"
-                style={{ color: 'white' }}
-              >
-                {(secondPage && 'Postar') || 'Avançar'}
-              </Text>
-            </Button>
+              && (
+                <form
+                  id="formImagem"
+                  onSubmit={onSubmit || form.handleSubmit}
+                >
+                  <FilterSection
+                    form={form}
+                    photoUrl={form.values.photoUrl}
+                    setSelectedFilter={setSelectedFilter}
+                  />
+                  <ButtonForm type="submit" isSecondPage={secondPage}>
+                    Postar
+                  </ButtonForm>
+                </form>
+              )) || (
+                <>
+                  <InputSection form={form} />
+                  <ButtonForm
+                    type="button"
+                    onClick={() => togglePage()}
+                    isSecondPage={secondPage}
+                  >
+                    Avançar
+                  </ButtonForm>
+                </>
+            )}
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
@@ -180,3 +337,11 @@ export default function FormImagem({ ModalCloseButton, propsDoModal }) {
     </FormImagemWrapper>
   );
 }
+
+FormImagem.defaultProps = {
+  onSubmit: null,
+};
+
+FormImagem.propTypes = {
+  onSubmit: PropTypes.func,
+};
