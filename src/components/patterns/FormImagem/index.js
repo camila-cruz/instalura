@@ -11,6 +11,7 @@ import { useForm } from '../../../infra/hooks/forms/useForm';
 import { postService } from '../../../services/post/postService';
 
 const FILTERS = [
+  'nenhum',
   '1977',
   'aden',
   'amaro',
@@ -73,7 +74,6 @@ const ImagePlaceholderWrapper = styled.div`
   height: 100vw;
   max-height: 375px;
   max-width: 375px;
-  border: 1px solid black;
 
   figure {
     margin: 0px;
@@ -150,10 +150,11 @@ InputSection.propTypes = {
 };
 
 const FilterWrapper = styled.div`
-  display: flex,
+  display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 12px;
+  cursor: pointer;
 
   figure {
     margin: 0;
@@ -210,6 +211,7 @@ function FilterSection({ photoUrl, setSelectedFilter }) {
           filter={filterOption}
           photoUrl={photoUrl}
           setSelectedFilter={setSelectedFilter}
+          key={filterOption}
         />
       ))}
     </div>
