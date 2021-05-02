@@ -55,15 +55,24 @@ function UserPostsRow(posts, index) {
             width={sizes}
             height={sizes}
           >
-            <img
-              src={post.photoUrl}
-              alt=""
+            <figure
+              className={`filter-${post.filter}`}
               style={{
-                objectFit: 'cover',
                 width: 'inherit',
-                height: '100%',
+                height: 'inherit',
+                margin: '0',
               }}
-            />
+            >
+              <img
+                src={post.photoUrl}
+                alt=""
+                style={{
+                  objectFit: 'cover',
+                  width: 'inherit',
+                  height: '100%',
+                }}
+              />
+            </figure>
           </Box>
         </Grid.Col>
       ))}

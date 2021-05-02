@@ -28,12 +28,13 @@ export function Post({
   likes,
   photoUrl,
   user,
+  filter,
 }) {
   return (
     <PostWrapper>
       <Box>
         <PostNav user={user} />
-        <PostImage src={photoUrl} />
+        <PostImage src={photoUrl} filter={filter} />
         <PostActions likes={likes} />
         <PostComments description={description} />
       </Box>
@@ -47,4 +48,5 @@ Post.propTypes = {
   likes: PropTypes.array.isRequired,
   photoUrl: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
+  filter: PropTypes.string.isRequired,
 };
