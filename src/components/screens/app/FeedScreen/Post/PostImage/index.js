@@ -26,7 +26,7 @@ const Image = styled.figure`
 export function PostImage({ src, filter }) {
   return (
     <Image className={`filter-${filter}`}>
-      <img src={src} alt="Nicolas Cage e uma espada" />
+      <img src={src} alt="Nicolas Cage e uma espada" loading="lazy" />
     </Image>
   );
 }
