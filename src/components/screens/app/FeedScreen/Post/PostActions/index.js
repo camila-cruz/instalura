@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import {
   HeartOutline as LikeIcon,
   PaperPlaneOutline as PlaneIcon,
@@ -25,7 +26,7 @@ const Action = styled.div`
   column-gap: 8px;
 `;
 
-export function PostActions() {
+export function PostActions({ likes }) {
   return (
     <ActionsBar>
       <Grid.Col
@@ -39,7 +40,8 @@ export function PostActions() {
             variant="paragraph2bold"
             color="tertiary.main"
           >
-            5.2k
+            {likes}
+            {/* 5.2k */}
           </Text>
         </Action>
         <Action>
@@ -67,3 +69,7 @@ export function PostActions() {
     </ActionsBar>
   );
 }
+
+PostActions.propTypes = {
+  likes: PropTypes.number.isRequired,
+};

@@ -28,4 +28,24 @@ export const postService = {
         throw new Error(err);
       });
   },
+  async toggleLike({ postID }) {
+    const token = await authService(null).getToken();
+
+    return HttpClient(`${BASE_URL}/api/posts/${postID}/like`, {
+      method: 'POST',
+      body: {},
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(({ data }) => {
+        // Se for um like
+        if (data) {
+          return 1;
+        }
+        // Se for um dislike
+        return -1;
+      })
+      .catch(() => -1);
+  },
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Box } from '../../../../foundation/layout/Box';
@@ -7,6 +7,7 @@ import { PostImage } from './PostImage';
 import { PostActions } from './PostActions';
 import { PostComments } from './PostComments';
 import { breakpointsMedia } from '../../../../../theme/utils/breakpointsMedia';
+import { postService } from '../../../../../services/post/postService';
 
 const PostWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.light.color};
@@ -29,13 +30,22 @@ export function Post({
   photoUrl,
   user,
   filter,
+  id,
 }) {
+  const [likesCount, setLikesCount] = useState(likes.length);
+
+  function toggleLike() {
+    postService
+      .toggleLike({ postID: id })
+      .then((res) => setLikesCount(likesCount + res));
+  }
+
   return (
     <PostWrapper>
       <Box>
         <PostNav user={user} />
-        <PostImage src={photoUrl} filter={filter} />
-        <PostActions likes={likes} />
+        <PostImage src={photoUrl} filter={filter} likes={likesCount} toggleLike={toggleLike} />
+        <PostActions likes={likesCount} />
         <PostComments description={description} />
       </Box>
     </PostWrapper>
@@ -49,4 +59,5 @@ Post.propTypes = {
   photoUrl: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
