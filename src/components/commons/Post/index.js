@@ -44,7 +44,16 @@ export function Post({
     <PostWrapper>
       <Box>
         <PostNav user={user} />
-        <PostImage src={photoUrl} filter={filter} likes={likesCount} toggleLike={toggleLike} />
+        <PostImage
+          src={photoUrl}
+          filter={filter}
+          likes={likesCount}
+          toggleLike={toggleLike}
+          height={{
+            xs: '320px',
+            md: '510px',
+          }}
+        />
         <PostActions likes={likesCount} />
         <PostComments description={description} />
       </Box>
@@ -58,6 +67,40 @@ Post.propTypes = {
   likes: PropTypes.array.isRequired,
   photoUrl: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
+  filter: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+};
+
+export function ProfilePost({
+  likes,
+  photoUrl,
+  filter,
+  id,
+}) {
+  const [likesCount, setLikesCount] = useState(likes.length);
+
+  function toggleLike() {
+    postService
+      .toggleLike({ postID: id })
+      .then((res) => setLikesCount(likesCount + res));
+  }
+
+  return (
+    <PostImage
+      src={photoUrl}
+      filter={filter}
+      likes={likesCount}
+      toggleLike={toggleLike}
+      width="inherit"
+      height="inherit"
+    />
+  );
+}
+
+ProfilePost.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  likes: PropTypes.array.isRequired,
+  photoUrl: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
