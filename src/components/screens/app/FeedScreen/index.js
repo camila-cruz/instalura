@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Box } from '../../../foundation/layout/Box';
-import { Post } from './Post';
+import { Post } from '../../../commons/Post';
 import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';

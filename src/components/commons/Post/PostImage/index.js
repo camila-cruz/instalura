@@ -1,24 +1,17 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { HeartOutline as LikeIcon } from '@styled-icons/evaicons-outline';
-import { breakpointsMedia } from '../../../../../../theme/utils/breakpointsMedia';
-import { Box } from '../../../../../foundation/layout/Box';
+import { Box } from '../../../foundation/layout/Box';
+import { propToStyle } from '../../../../theme/utils/propToStyle';
 
 const Image = styled.figure`
   position: relative;
   padding: 0;
   margin: 0;
-  /* transition: 1s cubic-bezier(.17,.67,.83,.67); */
 
-  ${breakpointsMedia({
-    xs: css`
-      height: 320px;
-    `,
-    md: css`
-      height: 510px;
-    `,
-  })}
+  ${propToStyle('height')}
+  ${propToStyle('width')}
 
   & > img {
     width: 100%;
@@ -44,14 +37,13 @@ const Image = styled.figure`
   }
 `;
 
-function LikeWrapper({ toggleLike, likes }) {
+function LikeWrapper({ likes }) {
   return (
     <Box
       position="absolute"
       top={0}
       width="100%"
       height="100%"
-      onClick={toggleLike}
     >
       <Box
         display="flex"
@@ -75,24 +67,37 @@ function LikeWrapper({ toggleLike, likes }) {
 }
 
 LikeWrapper.propTypes = {
-  toggleLike: PropTypes.func.isRequired,
   likes: PropTypes.number.isRequired,
 };
 
 export function PostImage({
-  src, filter, likes, toggleLike,
+  src, filter, likes, toggleLike, height, width,
 }) {
   return (
-    <Image className={(filter && filter.includes('filter') && filter) || `filter-${filter}`}>
+    <Image
+      className={(filter && filter.includes('filter') && filter) || `filter-${filter}`}
+      height={height}
+      width={width}
+      onClick={toggleLike}
+    >
       <img src={src} alt="Nicolas Cage e uma espada" loading="lazy" />
-      <LikeWrapper likes={likes} toggleLike={toggleLike} />
+      <LikeWrapper likes={likes} />
     </Image>
   );
 }
+
+PostImage.defaultProps = {
+  height: 'initial',
+  width: 'initial',
+};
 
 PostImage.propTypes = {
   src: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
   toggleLike: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  height: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  width: PropTypes.any,
 };

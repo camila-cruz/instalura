@@ -7,8 +7,8 @@ import {
   MessageCircleOutline as CommentIcon,
   BookmarkOutline as BookmarkIcon,
 } from '@styled-icons/evaicons-outline';
-import { Grid } from '../../../../../foundation/layout/Grid';
-import Text from '../../../../../foundation/Text';
+import { Grid } from '../../../foundation/layout/Grid';
+import Text from '../../../foundation/Text';
 
 const ActionsBar = styled.div`
   display: flex;

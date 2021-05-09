@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { MoreHorizontalOutline as DotsIcon } from '@styled-icons/evaicons-outline/MoreHorizontalOutline';
-import { Avatar } from '../../../../../commons/Avatar';
-import { Grid } from '../../../../../foundation/layout/Grid';
-import Text from '../../../../../foundation/Text';
+import { Avatar } from '../../Avatar';
+import { Grid } from '../../../foundation/layout/Grid';
+import Text from '../../../foundation/Text';
 
 const Nav = styled.div`
   display: flex;

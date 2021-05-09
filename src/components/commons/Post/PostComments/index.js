@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Grid } from '../../../../../foundation/layout/Grid';
-import Text from '../../../../../foundation/Text';
-import { Avatar } from '../../../../../commons/Avatar';
-import { breakpointsMedia } from '../../../../../../theme/utils/breakpointsMedia';
+import { Grid } from '../../../foundation/layout/Grid';
+import Text from '../../../foundation/Text';
+import { Avatar } from '../../Avatar';
+import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
 
 const Comments = styled.div`
   display: flex;
