@@ -34,8 +34,8 @@ export function Post({
     <PostWrapper>
       <Box>
         <PostNav user={user} />
-        <PostImage src={photoUrl} filter={filter} />
-        <PostActions likes={likes} />
+        <PostImage src={photoUrl} filter={filter} likes={likes.length} />
+        <PostActions likes={likes.length} />
         <PostComments description={description} />
       </Box>
     </PostWrapper>
