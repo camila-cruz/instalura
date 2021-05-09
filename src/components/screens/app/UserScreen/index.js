@@ -99,6 +99,39 @@ UserPosts.propTypes = {
   posts: PropTypes.array.isRequired,
 };
 
+function UserBio({ name, bio, display }) {
+  return (
+    <Grid.Col
+      value={{ xs: 12, lg: 6 }}
+      // display="flex"
+      display={display}
+      flexDirection="column"
+      justifyContent="flex-start"
+      padding="16px"
+    >
+      <Text
+        variant="paragraph1bold"
+        color="tertiary.main"
+      >
+        {name}
+      </Text>
+      <Text
+        variant="paragraph2"
+        color="tertiary.light"
+      >
+        {bio}
+      </Text>
+    </Grid.Col>
+  );
+}
+
+UserBio.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  display: PropTypes.any.isRequired,
+  name: PropTypes.string.isRequired,
+  bio: PropTypes.string.isRequired,
+};
+
 export default function UserScreen({ userInfo, posts }) {
   return (
     <Grid.Container
@@ -140,26 +173,12 @@ export default function UserScreen({ userInfo, posts }) {
           statsCount={userInfo.totalFollowers}
           statsTitle="Seguidores"
         />
-        <Grid.Col
-          value={{ xs: 12, lg: 6 }}
+        <UserBio
+          name="Nicolas Cage"
+          bio={userInfo.bio}
+          // display={{ xs: 'flex', md: 'none' }}
           display="flex"
-          flexDirection="column"
-          justifyContent="flex-start"
-          padding="16px"
-        >
-          <Text
-            variant="paragraph1bold"
-            color="tertiary.main"
-          >
-            Nicolas Cage
-          </Text>
-          <Text
-            variant="paragraph2"
-            color="tertiary.light"
-          >
-            {userInfo.bio}
-          </Text>
-        </Grid.Col>
+        />
       </Grid.Row>
       <Box
         display="flex"
