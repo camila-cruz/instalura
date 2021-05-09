@@ -37,14 +37,13 @@ const Image = styled.figure`
   }
 `;
 
-function LikeWrapper({ toggleLike, likes }) {
+function LikeWrapper({ likes }) {
   return (
     <Box
       position="absolute"
       top={0}
       width="100%"
       height="100%"
-      onClick={toggleLike}
     >
       <Box
         display="flex"
@@ -68,7 +67,6 @@ function LikeWrapper({ toggleLike, likes }) {
 }
 
 LikeWrapper.propTypes = {
-  toggleLike: PropTypes.func.isRequired,
   likes: PropTypes.number.isRequired,
 };
 
@@ -80,9 +78,10 @@ export function PostImage({
       className={(filter && filter.includes('filter') && filter) || `filter-${filter}`}
       height={height}
       width={width}
+      onClick={toggleLike}
     >
       <img src={src} alt="Nicolas Cage e uma espada" loading="lazy" />
-      <LikeWrapper likes={likes} toggleLike={toggleLike} />
+      <LikeWrapper likes={likes} />
     </Image>
   );
 }
