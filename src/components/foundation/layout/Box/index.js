@@ -5,6 +5,7 @@ export const Box = styled.div`
   ${propToStyle('display')}
   ${propToStyle('flexDirection')}
   ${propToStyle('justifyContent')}
+  ${propToStyle('alignItems')}
   ${propToStyle('flex')}
   ${propToStyle('flexWrap')}
   ${propToStyle('backgroundImage')}
@@ -23,5 +24,10 @@ export const Box = styled.div`
   ${propToStyle('marginRight')}
   ${propToStyle('maxWidth')}
   ${propToStyle('maxHeight')}
+  ${propToStyle('position')}
+  ${propToStyle('top')}
+  ${propToStyle('left')}
+  ${propToStyle('right')}
+  ${propToStyle('bottom')}
   ${({ theme, borderRadiusTheme }) => borderRadiusTheme && `border-radius: ${theme.borderRadius}`};
 `;

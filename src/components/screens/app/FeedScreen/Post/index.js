@@ -34,7 +34,7 @@ export function Post({
     <PostWrapper>
       <Box>
         <PostNav user={user} />
-        <PostImage src={photoUrl} filter={filter} likes={likes.length} />
+        <PostImage src={photoUrl} filter={filter} likes={likes.length} toggleLike={() => console.log('a')} />
         <PostActions likes={likes.length} />
         <PostComments description={description} />
       </Box>

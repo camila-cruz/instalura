@@ -71,6 +71,5 @@ export function PostActions({ likes }) {
 }
 
 PostActions.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  likes: PropTypes.array.isRequired,
+  likes: PropTypes.number.isRequired,
 };
