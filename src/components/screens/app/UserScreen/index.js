@@ -4,6 +4,7 @@ import { Avatar } from '../../../commons/Avatar';
 import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { Box } from '../../../foundation/layout/Box';
+import { ProfilePost } from '../../../commons/Post';
 
 function UserStats({ statsCount, statsTitle }) {
   return (
@@ -55,24 +56,13 @@ function UserPostsRow(posts, index) {
             width={sizes}
             height={sizes}
           >
-            <figure
-              className={`filter-${post.filter}`}
-              style={{
-                width: 'inherit',
-                height: 'inherit',
-                margin: '0',
-              }}
-            >
-              <img
-                src={post.photoUrl}
-                alt=""
-                style={{
-                  objectFit: 'cover',
-                  width: 'inherit',
-                  height: '100%',
-                }}
-              />
-            </figure>
+            <ProfilePost
+              likes={post.likes}
+              photoUrl={post.photoUrl}
+              filter={post.filter}
+              // eslint-disable-next-line no-underscore-dangle
+              id={post._id}
+            />
           </Box>
         </Grid.Col>
       ))}
