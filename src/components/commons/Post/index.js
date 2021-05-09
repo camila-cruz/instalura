@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Box } from '../../../../foundation/layout/Box';
+import { Box } from '../../foundation/layout/Box';
 import { PostNav } from './PostNav';
 import { PostImage } from './PostImage';
 import { PostActions } from './PostActions';
 import { PostComments } from './PostComments';
-import { breakpointsMedia } from '../../../../../theme/utils/breakpointsMedia';
-import { postService } from '../../../../../services/post/postService';
+import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
+import { postService } from '../../../services/post/postService';
 
 const PostWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.light.color};

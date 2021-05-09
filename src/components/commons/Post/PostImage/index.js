@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { HeartOutline as LikeIcon } from '@styled-icons/evaicons-outline';
-import { breakpointsMedia } from '../../../../../../theme/utils/breakpointsMedia';
-import { Box } from '../../../../../foundation/layout/Box';
+import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
+import { Box } from '../../../foundation/layout/Box';
 
 const Image = styled.figure`
   position: relative;
