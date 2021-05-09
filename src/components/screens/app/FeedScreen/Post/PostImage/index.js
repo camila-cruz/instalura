@@ -83,7 +83,7 @@ export function PostImage({
   src, filter, likes, toggleLike,
 }) {
   return (
-    <Image className={`filter-${filter}`}>
+    <Image className={(filter && filter.includes('filter') && filter) || `filter-${filter}`}>
       <img src={src} alt="Nicolas Cage e uma espada" loading="lazy" />
       <LikeWrapper likes={likes} toggleLike={toggleLike} />
     </Image>
