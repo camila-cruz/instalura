@@ -8,8 +8,8 @@ export default function FAQScreen({ faqCategories }) {
   return (
     <Grid.Container style={{ flex: 1 }}>
       <Grid.Row
-        marginTop={{ xs: '32px', md: '100px' }}
-        marginBottom={{ xs: '32px', md: '100px' }}
+        marginTop={{ xs: '32px', md: '48px' }}
+        marginBottom={{ xs: '32px', md: '64px' }}
         justifyContent="center"
       >
         <Grid.Col

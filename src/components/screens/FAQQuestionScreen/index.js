@@ -24,7 +24,7 @@ export default function FAQQuestionScreen({ category, question }) {
       >
         <Grid.Col
           offset={{ sm: 0, lg: 1 }}
-          value={{ xs: 12, md: 4, lg: 4 }}
+          value={{ xs: 12, md: 4, lg: 3 }}
         >
           <Text
             variant="title"
@@ -38,14 +38,13 @@ export default function FAQQuestionScreen({ category, question }) {
           <Box
             as="ul"
             listStyle="none"
-            padding="24px 30px"
+            padding="24px 32px"
             backgroundColor={theme.colors.borders.main.color}
             borderRadiusTheme
           >
             {category.questions.map((currentQuestion) => (
-              <li>
+              <li key={currentQuestion.slug} style={{ marginBottom: '16px' }}>
                 <Text
-                  key={currentQuestion.slug}
                   as={Link}
                   variant="paragraph2"
                   href={`/faq/${currentQuestion.slug}`}
@@ -60,6 +59,7 @@ export default function FAQQuestionScreen({ category, question }) {
         </Grid.Col>
 
         <Grid.Col
+          offset={{ lg: 1 }}
           value={{ lg: 6 }}
           marginBottom={{
             xs: '50px',
