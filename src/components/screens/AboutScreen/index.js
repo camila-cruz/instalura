@@ -15,12 +15,13 @@ export default function AboutScreen({ messages }) {
     >
       <Grid.Container>
         <Grid.Row
-          marginTop={{ xs: '32px', md: '120px' }}
+          marginTop={{ xs: '32px', md: '48px' }}
           flex="1"
+          // justifyContent="center"
         >
           <Grid.Col
             value={{ xs: 12, md: 6, lg: 6 }}
-            offset={{ md: 2 }}
+            offset={{ md: 3 }}
             flex={1}
           >
             <Text
