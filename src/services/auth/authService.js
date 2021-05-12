@@ -10,8 +10,8 @@ const BASE_URL = isStagingEnv
   // Back-end de PROD
   : 'https://instalura-api-omariosouto.vercel.app';
 
-export function authService(ctx) {
-  const cookies = parseCookies(ctx);
+export function authService(ctx, parseCookiesModule = parseCookies) {
+  const cookies = parseCookiesModule(ctx);
   const token = cookies[LOGIN_COOKIE_APP_TOKEN];
 
   return {
