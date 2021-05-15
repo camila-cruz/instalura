@@ -18,10 +18,10 @@ export function authService(ctx, parseCookiesModule = parseCookies) {
     async getToken() {
       return token;
     },
-    async hasActiveSession() {
+    async hasActiveSession(HttpClientModule = HttpClient) {
       if (!token) return false;
 
-      return HttpClient(`${BASE_URL}/api/auth`, {
+      return HttpClientModule(`${BASE_URL}/api/auth`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,7 +31,8 @@ export function authService(ctx, parseCookiesModule = parseCookies) {
           if (!data.authenticated) {
             loginService.logout(ctx);
           }
-          return data.authenticated;
+          // data.authenticated ? true : false
+          return !!data.authenticated;
         })
         .catch(() => {
           loginService.logout(ctx);
