@@ -91,4 +91,25 @@ describe('authService', () => {
       });
     });
   });
+
+  describe('getSession()', () => {
+    describe('when there is no token', () => {
+      test('no session is returned', async () => {
+        const authServiceResponse = await authService({}, parseCookiesModule)
+          .getSession(() => {});
+
+        expect(authServiceResponse).toEqual({});
+      });
+    });
+
+    describe('when there is a valid token', () => {
+      test('the user session is returned', async () => {
+        const fakeSession = { user: 'Astrogilda' };
+        const authServiceResponse = await authService(fakeCtx, parseCookiesModule)
+          .getSession(() => fakeSession);
+
+        expect(authServiceResponse).toEqual(fakeSession.user);
+      });
+    });
+  });
 });

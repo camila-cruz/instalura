@@ -39,8 +39,10 @@ export function authService(ctx, parseCookiesModule = parseCookies) {
           return false;
         });
     },
-    async getSession() {
-      const session = jwt.decode(token);
+    async getSession(JWTDecoder = jwt.decode) {
+      if (!token) return {};
+
+      const session = JWTDecoder(token);
       return session.user;
     },
   };
