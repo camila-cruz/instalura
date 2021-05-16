@@ -9,12 +9,14 @@ const BASE_URL = isStagingEnv
   : 'https://instalura-api-omariosouto.vercel.app';
 
 export const userService = {
-  async getProfilePage(ctx) {
+  async getProfilePage(ctx, HttpClientModule = HttpClient, parseCookiesModule) {
     try {
       const url = `${BASE_URL}/api/users/posts`;
-      const token = await authService(ctx).getToken();
+      const token = await authService(ctx, parseCookiesModule).getToken();
 
-      const response = await HttpClient(url, {
+      if (!token) return {};
+
+      const response = await HttpClientModule(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
