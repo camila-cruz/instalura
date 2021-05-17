@@ -9,6 +9,7 @@ import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';
 import { useUserService } from '../../../../services/user/hook';
+import { projetosGalera } from './projetosGalera';
 
 const FeedScreenWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.main.color};
@@ -78,8 +79,8 @@ export default function FeedScreen({ user }) {
               <ProjectCard
                 username={user.username}
                 name="Camila Cruz"
-                imageSrc="https://via.placeholder.com/64"
-                githubUrl="https://github.com/camila-cruz"
+                imageSrc="https://github.com/camila-cruz.png"
+                githubUrl="https://github.com/camila-cruz/instalura"
                 currentUser
               />
               <Text
@@ -90,30 +91,15 @@ export default function FeedScreen({ user }) {
               >
                 Projetos da galera
               </Text>
-              <ProjectCard
-                username={user.username}
-                name="Camila Cruz"
-                imageSrc="https://via.placeholder.com/48"
-                githubUrl="https://github.com/camila-cruz"
-              />
-              <ProjectCard
-                username={user.username}
-                name="Camila Cruz"
-                imageSrc="https://via.placeholder.com/48"
-                githubUrl="https://github.com/camila-cruz"
-              />
-              <ProjectCard
-                username={user.username}
-                name="Camila Cruz"
-                imageSrc="https://via.placeholder.com/48"
-                githubUrl="https://github.com/camila-cruz"
-              />
-              <ProjectCard
-                username={user.username}
-                name="Camila Cruz"
-                imageSrc="https://via.placeholder.com/48"
-                githubUrl="https://github.com/camila-cruz"
-              />
+              {projetosGalera.map((projeto) => (
+                <ProjectCard
+                  username={projeto.username}
+                  name={projeto.name}
+                  imageSrc={`https://github.com/${projeto.username}.png`}
+                  githubUrl={`https://github.com/${projeto.username}/${projeto.githubUrl}`}
+                  currentUser
+                />
+              ))}
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>
