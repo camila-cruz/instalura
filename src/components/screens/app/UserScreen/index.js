@@ -155,7 +155,7 @@ export default function UserScreen({ userInfo, posts }) {
             }}
           >
             <Avatar
-              src="https://via.placeholder.com/110"
+              src="/images/avatar.png"
               alt="Foto de perfil deste usuário"
               size="inherit"
             />
