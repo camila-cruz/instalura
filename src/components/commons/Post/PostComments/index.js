@@ -70,17 +70,18 @@ export function PostComments({ description }) {
       <Grid.Col>
         <OverlappedAvatars>
           <Avatar
-            src="https://via.placeholder.com/32"
+            src="/images/avatar.png"
             size={24}
             alt="Foto de perfil deste usuário"
           />
           <Avatar
-            src="https://via.placeholder.com/32"
+            // src="https://i.pinimg.com/originals/38/ac/07/38ac0777168829aab7a62b26cc76a756.jpg"
+            src="/images/avatar.png"
             size={24}
             alt="Foto de perfil deste usuário"
           />
           <Avatar
-            src="https://via.placeholder.com/32"
+            src="/images/avatar.png"
             size={24}
             alt="Foto de perfil deste usuário"
           />
