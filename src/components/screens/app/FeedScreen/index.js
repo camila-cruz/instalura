@@ -54,8 +54,15 @@ export default function FeedScreen({ user }) {
                 md: 'initial',
               }}
             >
-              {/* eslint-disable-next-line react/prop-types */}
-              {posts && posts.map((post) => <Post {...post} id={post._id} key={post._id} />)}
+              {posts
+                && posts.map((post) => (
+                  <Post
+                    userInfo={user}
+                    {...post}
+                    id={post._id}
+                    key={post._id}
+                  />
+                ))}
             </Grid.Col>
             <Grid.Col
               display={{

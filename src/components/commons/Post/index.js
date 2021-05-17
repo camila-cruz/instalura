@@ -28,9 +28,9 @@ export function Post({
   description,
   likes,
   photoUrl,
-  user,
   filter,
   id,
+  userInfo,
 }) {
   const [likesCount, setLikesCount] = useState(likes.length);
 
@@ -43,7 +43,7 @@ export function Post({
   return (
     <PostWrapper>
       <Box>
-        <PostNav user={user} />
+        <PostNav user={userInfo.username} />
         <PostImage
           src={photoUrl}
           filter={filter}
@@ -66,9 +66,10 @@ Post.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   likes: PropTypes.array.isRequired,
   photoUrl: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  userInfo: PropTypes.object.isRequired,
 };
 
 export function ProfilePost({
