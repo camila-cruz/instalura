@@ -26,7 +26,7 @@ export default function LikeWrapper({ likes, isLiked }) {
             width="50px"
             height="50px"
             className="lottie-container basic"
-            playingState={!isLiked ? 'playing' : 'stopped'}
+            playingState={isLiked ? 'playing' : 'stopped'}
             config={{ animationData: likeAnimation, loop: false, autoplay: false }}
           />
         </div>

@@ -37,17 +37,17 @@ const Image = styled.figure`
 `;
 
 export function PostImage({
-  src, filter, likes, toggleLike, isLiked, height, width,
+  src, filter, likesController, height, width,
 }) {
   return (
     <Image
       className={(filter && filter.includes('filter') && filter) || `filter-${filter}`}
       height={height}
       width={width}
-      onClick={toggleLike}
+      onClick={likesController.toggleLike}
     >
       <img src={src} alt="Nicolas Cage e uma espada" loading="lazy" />
-      <LikeWrapper likes={likes} isLiked={isLiked} />
+      <LikeWrapper likes={likesController.likesCount} isLiked={likesController.isLiked} />
     </Image>
   );
 }
@@ -60,9 +60,11 @@ PostImage.defaultProps = {
 PostImage.propTypes = {
   src: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
-  likes: PropTypes.number.isRequired,
-  isLiked: PropTypes.bool.isRequired,
-  toggleLike: PropTypes.func.isRequired,
+  likesController: PropTypes.shape({
+    likesCount: PropTypes.number.isRequired,
+    isLiked: PropTypes.bool.isRequired,
+    toggleLike: PropTypes.func.isRequired,
+  }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   height: PropTypes.any,
   // eslint-disable-next-line react/forbid-prop-types
