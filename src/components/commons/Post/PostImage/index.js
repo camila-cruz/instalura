@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { HeartOutline as LikeIcon } from '@styled-icons/evaicons-outline';
-import { Box } from '../../../foundation/layout/Box';
 import { propToStyle } from '../../../../theme/utils/propToStyle';
+import LikeWrapper from './LikeWrapper';
 
 const Image = styled.figure`
   position: relative;
@@ -37,41 +36,8 @@ const Image = styled.figure`
   }
 `;
 
-function LikeWrapper({ likes }) {
-  return (
-    <Box
-      position="absolute"
-      top={0}
-      width="100%"
-      height="100%"
-    >
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        width="100%"
-        height="100%"
-      >
-        <div>
-          <LikeIcon size={32} />
-        </div>
-        <div
-          style={{ fontSize: '24px' }}
-        >
-          {likes}
-        </div>
-      </Box>
-    </Box>
-  );
-}
-
-LikeWrapper.propTypes = {
-  likes: PropTypes.number.isRequired,
-};
-
 export function PostImage({
-  src, filter, likes, toggleLike, height, width,
+  src, filter, likes, toggleLike, isLiked, height, width,
 }) {
   return (
     <Image
@@ -81,7 +47,7 @@ export function PostImage({
       onClick={toggleLike}
     >
       <img src={src} alt="Nicolas Cage e uma espada" loading="lazy" />
-      <LikeWrapper likes={likes} />
+      <LikeWrapper likes={likes} isLiked={isLiked} />
     </Image>
   );
 }
@@ -95,6 +61,7 @@ PostImage.propTypes = {
   src: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
+  isLiked: PropTypes.bool.isRequired,
   toggleLike: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   height: PropTypes.any,

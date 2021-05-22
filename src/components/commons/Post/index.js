@@ -33,8 +33,10 @@ export function Post({
   userInfo,
 }) {
   const [likesCount, setLikesCount] = useState(likes.length);
+  const [isLiked, setIsLiked] = useState(false);
 
   function toggleLike() {
+    setIsLiked(!isLiked);
     postService
       .toggleLike({ postID: id })
       .then((res) => setLikesCount(likesCount + res));
@@ -49,6 +51,7 @@ export function Post({
           filter={filter}
           likes={likesCount}
           toggleLike={toggleLike}
+          isLiked={isLiked}
           height={{
             xs: '320px',
             md: '510px',
