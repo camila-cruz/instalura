@@ -51,7 +51,10 @@ export function Post({
             md: '510px',
           }}
         />
-        <PostActions likes={likesController.likesCount} />
+        <PostActions
+          likes={likesController.likesCount}
+          isLiked={likesController.isLiked}
+        />
         <PostComments description={description} />
       </Box>
     </PostWrapper>
