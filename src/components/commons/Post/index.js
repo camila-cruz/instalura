@@ -8,6 +8,7 @@ import { PostActions } from './PostActions';
 import { PostComments } from './PostComments';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { postService } from '../../../services/post/postService';
+import { useLikes } from '../../../infra/hooks/posts/useLike';
 
 const PostWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.light.color};
@@ -32,13 +33,10 @@ export function Post({
   id,
   userInfo,
 }) {
-  const [likesCount, setLikesCount] = useState(likes.length);
+  const userID = userInfo.id;
+  const postID = id;
 
-  function toggleLike() {
-    postService
-      .toggleLike({ postID: id })
-      .then((res) => setLikesCount(likesCount + res));
-  }
+  const likesController = useLikes({ postID, likes, userID });
 
   return (
     <PostWrapper>
@@ -47,14 +45,16 @@ export function Post({
         <PostImage
           src={photoUrl}
           filter={filter}
-          likes={likesCount}
-          toggleLike={toggleLike}
+          likesController={likesController}
           height={{
             xs: '320px',
             md: '510px',
           }}
         />
-        <PostActions likes={likesCount} />
+        <PostActions
+          likes={likesController.likesCount}
+          isLiked={likesController.isLiked}
+        />
         <PostComments description={description} />
       </Box>
     </PostWrapper>

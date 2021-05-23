@@ -38,14 +38,7 @@ export const postService = {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then(({ data }) => {
-        // Se for um like
-        if (data) {
-          return 1;
-        }
-        // Se for um dislike
-        return -1;
-      })
-      .catch(() => -1);
+      .then(({ data }) => data)
+      .catch((err) => new Error(err));
   },
 };
