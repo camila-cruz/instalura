@@ -9,6 +9,9 @@ export async function HttpClient(url, { headers, body, ...options }) {
   })
     .then((respostaDoServidor) => {
       if (respostaDoServidor.ok) {
+        if (respostaDoServidor.status === 204) {
+          return { data: true };
+        }
         return respostaDoServidor.json();
       }
 

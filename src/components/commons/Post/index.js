@@ -34,8 +34,9 @@ export function Post({
   userInfo,
 }) {
   const userID = userInfo.id;
+  const postID = id;
 
-  const likesController = useLikes({ id, likes, userID });
+  const likesController = useLikes({ postID, likes, userID });
 
   return (
     <PostWrapper>

@@ -3,7 +3,10 @@ import { postService } from '../../../../services/post/postService';
 
 export function useLikes({ postID, likes, userID }) {
   const [likesCount, setLikesCount] = useState(likes.length);
-  const [isLiked, setIsLiked] = useState(() => likes.filter((like) => like.user === userID) > 0);
+  const [isLiked, setIsLiked] = useState(() => {
+    const hasUserLiked = likes.filter((like) => like.user === userID).length > 0;
+    return hasUserLiked;
+  });
 
   function toggleLike() {
     if (!isLiked) {
@@ -13,13 +16,9 @@ export function useLikes({ postID, likes, userID }) {
     }
 
     setIsLiked(!isLiked);
+
     postService
       .toggleLike({ postID });
-    // .then((res) => {
-    //   if (res > 0) {
-    //     setLikesCount(likesCount + res));
-    //   }
-    // }
   }
 
   return {
