@@ -39,7 +39,7 @@ UserStats.propTypes = {
   statsTitle: PropTypes.string.isRequired,
 };
 
-function UserPostsRow(posts, index) {
+function UserPostsRow(posts, index, userID) {
   const sizes = {
     xs: '95px',
     sm: '120px',
@@ -62,6 +62,7 @@ function UserPostsRow(posts, index) {
               filter={post.filter}
               // eslint-disable-next-line no-underscore-dangle
               id={post._id}
+              userID={userID}
             />
           </Box>
         </Grid.Col>
@@ -70,7 +71,7 @@ function UserPostsRow(posts, index) {
   );
 }
 
-function UserPosts({ posts }) {
+function UserPosts({ posts, userID }) {
   const gridRowLength = 3;
 
   // eslint-disable-next-line react/prop-types
@@ -89,7 +90,7 @@ function UserPosts({ posts }) {
 
   return (
     <Grid.Col value={{ md: 8 }} offset={{ md: 2 }}>
-      {postsDividedByChunks.map((postsChunk, index) => UserPostsRow(postsChunk, index))}
+      {postsDividedByChunks.map((postsChunk, index) => UserPostsRow(postsChunk, index, userID))}
     </Grid.Col>
   );
 }
@@ -97,6 +98,7 @@ function UserPosts({ posts }) {
 UserPosts.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   posts: PropTypes.array.isRequired,
+  userID: PropTypes.string.isRequired,
 };
 
 function UserBio({ name, bio, display }) {
@@ -185,7 +187,7 @@ export default function UserScreen({ userInfo, posts }) {
         flexWrap="wrap"
         justifyContent="space-between"
       >
-        <UserPosts posts={posts} />
+        <UserPosts posts={posts} userID={userInfo.id} />
       </Box>
     </Grid.Container>
   );
@@ -193,6 +195,7 @@ export default function UserScreen({ userInfo, posts }) {
 
 UserScreen.propTypes = {
   userInfo: PropTypes.shape({
+    id: PropTypes.string,
     bio: PropTypes.string,
     totalPosts: PropTypes.number,
     totalFollowing: PropTypes.number,

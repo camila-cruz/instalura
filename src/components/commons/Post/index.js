@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Box } from '../../foundation/layout/Box';
@@ -7,7 +7,6 @@ import { PostImage } from './PostImage';
 import { PostActions } from './PostActions';
 import { PostComments } from './PostComments';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
-import { postService } from '../../../services/post/postService';
 import { useLikes } from '../../../infra/hooks/posts/useLike';
 
 const PostWrapper = styled.div`
@@ -77,21 +76,17 @@ export function ProfilePost({
   photoUrl,
   filter,
   id,
+  userID,
 }) {
-  const [likesCount, setLikesCount] = useState(likes.length);
+  const postID = id;
 
-  function toggleLike() {
-    postService
-      .toggleLike({ postID: id })
-      .then((res) => setLikesCount(likesCount + res));
-  }
+  const likesController = useLikes({ postID, likes, userID });
 
   return (
     <PostImage
       src={photoUrl}
       filter={filter}
-      likes={likesCount}
-      toggleLike={toggleLike}
+      likesController={likesController}
       width="inherit"
       height="inherit"
     />
@@ -104,4 +99,5 @@ ProfilePost.propTypes = {
   photoUrl: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  userID: PropTypes.string.isRequired,
 };
