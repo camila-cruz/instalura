@@ -5,6 +5,7 @@ import { parseCookies, setCookie } from 'nookies';
 import { light, dark } from '../../../../theme';
 import { GlobalStyle } from '../../../../theme/GlobalStyle';
 import { ThemeSwitcher } from '../../../commons/ThemeSwitcher';
+import { AuthProvider } from './auth';
 
 export default function WebsiteGlobalProvider({ children }) {
   const [theme, setTheme] = React.useState(() => {
@@ -30,7 +31,9 @@ export default function WebsiteGlobalProvider({ children }) {
     <ThemeProvider theme={theme === 'light' ? light : dark}>
       <ThemeSwitcher onClick={toggleTheme} theme={theme} />
       <GlobalStyle />
-      {children}
+      <AuthProvider>
+        {children}
+      </AuthProvider>
     </ThemeProvider>
   );
 }
