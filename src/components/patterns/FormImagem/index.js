@@ -9,6 +9,7 @@ import { Grid } from '../../foundation/layout/Grid';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { useForm } from '../../../infra/hooks/forms/useForm';
 import { postService } from '../../../services/post/postService';
+import { AuthContext } from '../../wrappers/WebsitePage/context/auth';
 
 const FILTERS = [
   'nenhum',
@@ -252,6 +253,7 @@ ButtonForm.propTypes = {
 export default function FormImagem({ ModalCloseButton, propsDoModal, onSubmit }) {
   const [secondPage, setSecondPage] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('nenhum');
+  const { posts, setPosts } = React.useContext(AuthContext);
 
   const postSchema = {};
 
@@ -268,9 +270,9 @@ export default function FormImagem({ ModalCloseButton, propsDoModal, onSubmit })
         description: values.description,
         filter: selectedFilter,
       })
-        .then(() => {
+        .then((post) => {
+          setPosts([post, ...posts]);
           // Mensagem de sucesso
-          console.log('sucesso!');
         })
         .catch(() => {
           // Faça alguma coisa com o erro

@@ -23,7 +23,7 @@ export const postService = {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then(() => console.log('postei uma fotinho'))
+      .then((post) => post.data)
       .catch((err) => {
         throw new Error(err);
       });

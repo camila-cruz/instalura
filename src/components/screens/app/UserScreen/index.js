@@ -5,6 +5,8 @@ import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { Box } from '../../../foundation/layout/Box';
 import { ProfilePost } from '../../../commons/Post';
+import { AuthContext } from '../../../wrappers/WebsitePage/context/auth';
+import { useUserService } from '../../../../services/user/hook';
 
 function UserStats({ statsCount, statsTitle }) {
   return (
@@ -134,7 +136,14 @@ UserBio.propTypes = {
   bio: PropTypes.string.isRequired,
 };
 
-export default function UserScreen({ userInfo, posts }) {
+export default function UserScreen({ userInfo }) {
+  const { posts, setPosts } = React.useContext(AuthContext);
+  const dados = useUserService.getProfilePage();
+
+  React.useEffect(() => {
+    if (!dados.loading) setPosts(dados.data.posts.reverse());
+  }, [dados]);
+
   return (
     <Grid.Container
       marginTop={{ xs: '24px', md: '64px' }}
@@ -201,6 +210,4 @@ UserScreen.propTypes = {
     totalFollowing: PropTypes.number,
     totalFollowers: PropTypes.number,
   }).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  posts: PropTypes.array.isRequired,
 };

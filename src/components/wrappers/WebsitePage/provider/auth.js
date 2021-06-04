@@ -5,7 +5,7 @@ import { authService } from '../../../../services/auth/authService';
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState({});
-  const [posts, setPosts] = useState([]);
+  const [posts, setPostsList] = useState([]);
   const [hasActiveSession, setHasActiveSession] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
         hasActiveSession,
         user,
         posts,
-        setPosts: (postsList) => setPosts(postsList),
+        setPosts: (postsList) => setPostsList(postsList),
       }}
     >
       {children}
