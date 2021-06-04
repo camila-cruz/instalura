@@ -5,6 +5,7 @@ import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { Box } from '../../../foundation/layout/Box';
 import { ProfilePost } from '../../../commons/Post';
+import { UserContext } from '../../../wrappers/WebsitePage/context/user';
 
 function UserStats({ statsCount, statsTitle }) {
   return (
@@ -134,7 +135,13 @@ UserBio.propTypes = {
   bio: PropTypes.string.isRequired,
 };
 
-export default function UserScreen({ userInfo, posts }) {
+export default function UserScreen({ userInfo, posts: serverPosts }) {
+  const { posts, setPosts } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    setPosts(serverPosts.reverse());
+  }, []);
+
   return (
     <Grid.Container
       marginTop={{ xs: '24px', md: '64px' }}

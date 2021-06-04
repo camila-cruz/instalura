@@ -6,7 +6,6 @@ import { MenuWrapper } from './styles/MenuWrapper';
 import Link from '../Link';
 import { TabBar } from '../TabBar';
 import { Grid } from '../../foundation/layout/Grid';
-import { authService } from '../../../services/auth/authService';
 
 const links = [
   {
@@ -23,15 +22,7 @@ const links = [
   },
 ];
 
-export default function Menu({ onCadastrarClick }) {
-  const [hasActiveSession, setHasActiveSession] = React.useState(false);
-
-  React.useEffect(() => {
-    authService(null)
-      .hasActiveSession()
-      .then((status) => setHasActiveSession(status));
-  }, []);
-
+export default function Menu({ onCadastrarClick, hasActiveSession }) {
   if (hasActiveSession) {
     return (
       <MenuWrapper hasActiveSession={hasActiveSession}>
@@ -93,4 +84,5 @@ export default function Menu({ onCadastrarClick }) {
 
 Menu.propTypes = {
   onCadastrarClick: PropTypes.func.isRequired,
+  hasActiveSession: PropTypes.bool.isRequired,
 };

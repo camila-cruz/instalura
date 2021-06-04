@@ -10,6 +10,7 @@ import Text from '../../../foundation/Text';
 import { ProjectCard } from './ProjectCard';
 import { useUserService } from '../../../../services/user/hook';
 import { projetosGalera } from './projetosGalera';
+import { UserContext } from '../../../wrappers/WebsitePage/context/user';
 
 const FeedScreenWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background.main.color};
@@ -18,7 +19,7 @@ const FeedScreenWrapper = styled.div`
 `;
 
 export default function FeedScreen({ user }) {
-  const [posts, setPosts] = React.useState([]);
+  const { posts, setPosts } = React.useContext(UserContext);
   const dados = useUserService.getProfilePage();
 
   React.useEffect(() => {
