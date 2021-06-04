@@ -6,7 +6,6 @@ import Text from '../../../foundation/Text';
 import { Box } from '../../../foundation/layout/Box';
 import { ProfilePost } from '../../../commons/Post';
 import { UserContext } from '../../../wrappers/WebsitePage/context/user';
-import { useUserService } from '../../../../services/user/hook';
 
 function UserStats({ statsCount, statsTitle }) {
   return (
@@ -136,13 +135,12 @@ UserBio.propTypes = {
   bio: PropTypes.string.isRequired,
 };
 
-export default function UserScreen({ userInfo }) {
+export default function UserScreen({ userInfo, posts: serverPosts }) {
   const { posts, setPosts } = React.useContext(UserContext);
-  const dados = useUserService.getProfilePage();
 
   React.useEffect(() => {
-    if (!dados.loading) setPosts(dados.data.posts.reverse());
-  }, [dados]);
+    setPosts(serverPosts.reverse());
+  }, []);
 
   return (
     <Grid.Container
@@ -210,4 +208,6 @@ UserScreen.propTypes = {
     totalFollowing: PropTypes.number,
     totalFollowers: PropTypes.number,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  posts: PropTypes.array.isRequired,
 };
