@@ -9,6 +9,7 @@ import Modal from '../../commons/Modal';
 import { Box } from '../../foundation/layout/Box';
 import FormCadastro from '../../patterns/FormCadastro';
 import SEO from '../../commons/SEO';
+import { AuthContext } from './context/auth';
 import { WebsitePageContext } from './context';
 
 export { WebsitePageContext } from './context';
@@ -22,6 +23,7 @@ export default function WebsitePageWrapper({
 }) {
   const [isModalOpen, setModal] = useState(false);
   const theme = useTheme();
+  const { hasActiveSession } = React.useContext(AuthContext);
 
   return (
     <WebsitePageContext.Provider
@@ -51,6 +53,7 @@ export default function WebsitePageWrapper({
         {menuProps.display && (
           <Menu
             onCadastrarClick={() => setModal(true)}
+            hasActiveSession={hasActiveSession}
           />
         )}
         {children}
