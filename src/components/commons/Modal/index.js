@@ -48,7 +48,9 @@ const LockScroll = createGlobalStyle`
   }
 `;
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({
+  isOpen, onClose, children, animation, style,
+}) {
   return (
     <ModalWrapper
       isOpen={isOpen}
@@ -63,14 +65,7 @@ export default function Modal({ isOpen, onClose, children }) {
       {isOpen && <LockScroll />}
 
       <motion.div
-        variants={{
-          open: {
-            x: 0,
-          },
-          closed: {
-            x: '100%',
-          },
-        }}
+        variants={animation}
         animate={isOpen ? 'open' : 'closed'}
         transition={{
           duration: 0.5,
@@ -78,6 +73,7 @@ export default function Modal({ isOpen, onClose, children }) {
         style={{
           display: 'flex',
           flex: 1,
+          ...style,
         }}
       >
         {/* Props do modal */}
@@ -87,8 +83,24 @@ export default function Modal({ isOpen, onClose, children }) {
   );
 }
 
+Modal.defaultProps = {
+  animation: {
+    open: {
+      x: 0,
+    },
+    closed: {
+      x: '100%',
+    },
+  },
+  style: {},
+};
+
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  animation: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  style: PropTypes.object,
 };

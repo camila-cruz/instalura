@@ -124,7 +124,24 @@ export function TabBar() {
 
   return (
     <TabBarWrapper>
-      <Modal isOpen={isModalImagemOpen} onClose={() => setModalImagem(false)}>
+      <Modal
+        isOpen={isModalImagemOpen}
+        onClose={() => setModalImagem(false)}
+        animation={{
+          open: {
+            // y: 0,
+            scale: 1,
+          },
+          closed: {
+            // y: -100,
+            scale: 0,
+          },
+        }}
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         {(ModalCloseButton, propsDoModal) => (
           <FormImagem propsDoModal={propsDoModal} ModalCloseButton={ModalCloseButton} />
         )}
