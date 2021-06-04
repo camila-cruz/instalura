@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AuthContext } from '../context/auth';
 import { authService } from '../../../../services/auth/authService';
+import { UserProvider } from './user';
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState({});
-  const [posts, setPostsList] = useState([]);
   const [hasActiveSession, setHasActiveSession] = useState(false);
 
   useEffect(() => {
@@ -23,11 +23,11 @@ export function AuthProvider({ children }) {
       value={{
         hasActiveSession,
         user,
-        posts,
-        setPosts: (postsList) => setPostsList(postsList),
       }}
     >
-      {children}
+      <UserProvider>
+        {children}
+      </UserProvider>
     </AuthContext.Provider>
   );
 }

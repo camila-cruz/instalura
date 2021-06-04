@@ -5,7 +5,7 @@ import { Grid } from '../../../foundation/layout/Grid';
 import Text from '../../../foundation/Text';
 import { Box } from '../../../foundation/layout/Box';
 import { ProfilePost } from '../../../commons/Post';
-import { AuthContext } from '../../../wrappers/WebsitePage/context/auth';
+import { UserContext } from '../../../wrappers/WebsitePage/context/user';
 import { useUserService } from '../../../../services/user/hook';
 
 function UserStats({ statsCount, statsTitle }) {
@@ -137,7 +137,7 @@ UserBio.propTypes = {
 };
 
 export default function UserScreen({ userInfo }) {
-  const { posts, setPosts } = React.useContext(AuthContext);
+  const { posts, setPosts } = React.useContext(UserContext);
   const dados = useUserService.getProfilePage();
 
   React.useEffect(() => {

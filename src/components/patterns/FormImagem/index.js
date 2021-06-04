@@ -9,7 +9,7 @@ import { Grid } from '../../foundation/layout/Grid';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { useForm } from '../../../infra/hooks/forms/useForm';
 import { postService } from '../../../services/post/postService';
-import { AuthContext } from '../../wrappers/WebsitePage/context/auth';
+import { UserContext } from '../../wrappers/WebsitePage/context/user';
 
 const FILTERS = [
   'nenhum',
@@ -253,7 +253,7 @@ ButtonForm.propTypes = {
 export default function FormImagem({ ModalCloseButton, propsDoModal, onSubmit }) {
   const [secondPage, setSecondPage] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('nenhum');
-  const { posts, setPosts } = React.useContext(AuthContext);
+  const { posts, setPosts } = React.useContext(UserContext);
 
   const postSchema = {};
 
